@@ -1,7 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.model.domain;
 
 public class Funcionario extends Pessoa{
-
     private String Matricula;
     private Cargo Cargo;
 

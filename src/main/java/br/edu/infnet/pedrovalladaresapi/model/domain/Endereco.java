@@ -1,11 +1,18 @@
 package br.edu.infnet.pedrovalladaresapi.model.domain;
 
+
 public class Endereco {
     private String CEP;
-    private String logradouro;
+    private String Logradouro;
     private String Complemento;
     private String Bairro;
     private String UF;
+
+    @Override
+    public String toString(){
+        return String.format("CEP: %s\nLogradouro: %s\nComplemento: %s\nBairro: %s\nUF: %s",
+                CEP, Logradouro, Complemento, Bairro, UF);
+    }
 
     public String getCEP() {
         return CEP;
@@ -16,11 +23,11 @@ public class Endereco {
     }
 
     public String getLogradouro() {
-        return logradouro;
+        return Logradouro;
     }
 
     public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+        this.Logradouro = logradouro;
     }
 
     public String getComplemento() {

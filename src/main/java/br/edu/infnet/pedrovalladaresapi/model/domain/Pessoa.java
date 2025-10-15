@@ -9,7 +9,7 @@ public class Pessoa {
 
     @Override
     public String toString(){
-        return String.format("Nome: %s\n| CPF: %s\nEmail: %s\nTelefone: %s\nEndereço: %s",
+        return String.format("Nome: %s\nCPF: %s\nEmail: %s\nTelefone: %s\n%s",
                 Nome, CPF, Email, Telefone, Endereco.toString());
     }
 

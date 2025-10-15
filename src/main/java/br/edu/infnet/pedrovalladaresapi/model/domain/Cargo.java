@@ -5,6 +5,12 @@ public class Cargo {
     private String Nome;
     private Double Remuneracao;
 
+    @Override
+    public String toString(){
+        return String.format("Nome: %s\nRemuneração: %.2f",
+                Nome, Remuneracao);
+    }
+
     public int getId() {
         return Id;
     }

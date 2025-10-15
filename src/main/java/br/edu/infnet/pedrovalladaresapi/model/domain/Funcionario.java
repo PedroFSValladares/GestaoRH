@@ -5,6 +5,12 @@ public class Funcionario extends Pessoa{
     private String Matricula;
     private Cargo Cargo;
 
+    @Override
+    public String toString(){
+        return String.format("%s\nMatrícula: %s\n%s",
+                super.toString() ,Matricula, Cargo.toString());
+    }
+
     public String getMatricula() {
         return Matricula;
     }

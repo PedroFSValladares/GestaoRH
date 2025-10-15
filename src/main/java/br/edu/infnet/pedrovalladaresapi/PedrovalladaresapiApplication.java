@@ -23,6 +23,7 @@ public class PedrovalladaresapiApplication {
         Endereco endereco = new Endereco();
 
         endereco.setLogradouro("quadra xyz");
+        endereco.setComplemento("");
         endereco.setCEP("12345678");
         endereco.setBairro("Bairro ABC");
         endereco.setUF("GO");
@@ -33,6 +34,10 @@ public class PedrovalladaresapiApplication {
 
         cargo.setNome("Gerente");
         cargo.setRemuneracao(3000.0);
+        cargo.setValeAlimentacao(640.0);
+        cargo.setValeTransporte(435.22);
+        cargo.setAdicionalDeInsalubridade(false);
+        cargo.setAdicionalDePericulosidade(true);
         funcionario.setCargo(cargo);
         System.out.println(funcionario.toString());
 	}

@@ -1,35 +1,9 @@
 package br.edu.infnet.pedrovalladaresapi.model.domain;
 
-public class Funcionario {
-    private String Nome;
-    private String CPF;
-    private String Email;
+public class Funcionario extends Pessoa{
+
     private String Matricula;
-    private int CargoId;
-
-    public String getNome() {
-        return Nome;
-    }
-
-    public void setNome(String nome) {
-        Nome = nome;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
-    }
-
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
+    private Cargo Cargo;
 
     public String getMatricula() {
         return Matricula;
@@ -39,11 +13,11 @@ public class Funcionario {
         Matricula = matricula;
     }
 
-    public int getCargoId() {
-        return CargoId;
+    public Cargo getCargo() {
+        return Cargo;
     }
 
-    public void setCargoId(int cargoId) {
-        CargoId = cargoId;
+    public void setCargo(Cargo cargo) {
+        Cargo = cargo;
     }
 }

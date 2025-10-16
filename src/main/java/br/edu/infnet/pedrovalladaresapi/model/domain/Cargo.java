@@ -8,11 +8,12 @@ public class Cargo {
     private Double ValeTransporte;
     private Boolean AdicionalDePericulosidade;
     private Boolean AdicionalDeInsalubridade;
+    private Integer CargaHoraria;
 
     @Override
     public String toString(){
-        return String.format("Nome: %s\nRemuneração: %.2f\nVale Alimentação: %.2f\nVale Transporte: %.2f\nPericulosidade: %s\nInsalubridade: %s",
-                Nome, Remuneracao, ValeAlimentacao, ValeTransporte,
+        return String.format("Nome: %s\nCarga Horária: %d\nRemuneração: %.2f\nVale Alimentação: %.2f\nVale Transporte: %.2f\nPericulosidade: %s\nInsalubridade: %s",
+                Nome, CargaHoraria, Remuneracao, ValeAlimentacao, ValeTransporte,
                 AdicionalDePericulosidade ? "Sim" : "Não", AdicionalDeInsalubridade ? "Sim" : "Não");
     }
 
@@ -70,5 +71,13 @@ public class Cargo {
 
     public void setAdicionalDeInsalubridade(Boolean adicionalDeInsalubridade) {
         AdicionalDeInsalubridade = adicionalDeInsalubridade;
+    }
+
+    public Integer getCargaHoraria() {
+        return CargaHoraria;
+    }
+
+    public void setCargaHoraria(Integer cargaHoraria) {
+        CargaHoraria = cargaHoraria;
     }
 }

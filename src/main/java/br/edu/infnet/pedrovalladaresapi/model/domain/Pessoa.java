@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.model.domain;
 
-public class Pessoa {
+public abstract class Pessoa {
     private String Nome;
     private String CPF;
     private String Email;

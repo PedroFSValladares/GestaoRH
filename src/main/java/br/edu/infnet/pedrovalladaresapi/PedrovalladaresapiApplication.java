@@ -12,34 +12,6 @@ public class PedrovalladaresapiApplication {
 	public static void main(String[] args) {
         SpringApplication.run(PedrovalladaresapiApplication.class, args);
 
-        Funcionario funcionario = new Funcionario();
-
-        funcionario.setNome("Pedro");
-        funcionario.setEmail("pedro.valladares@email.com");
-        funcionario.setCPF("12345678910");
-        funcionario.setTelefone("61 12345678");
-        funcionario.setMatricula("123456");
-
-        Endereco endereco = new Endereco();
-
-        endereco.setLogradouro("quadra xyz");
-        endereco.setComplemento("");
-        endereco.setCEP("12345678");
-        endereco.setBairro("Bairro ABC");
-        endereco.setUF("GO");
-
-        funcionario.setEndereco(endereco);
-
-        Cargo cargo = new Cargo();
-
-        cargo.setNome("Gerente");
-        cargo.setRemuneracao(3000.0);
-        cargo.setValeAlimentacao(640.0);
-        cargo.setValeTransporte(435.22);
-        cargo.setAdicionalDeInsalubridade(false);
-        cargo.setAdicionalDePericulosidade(true);
-        funcionario.setCargo(cargo);
-        System.out.println(funcionario.toString());
 	}
 
 }

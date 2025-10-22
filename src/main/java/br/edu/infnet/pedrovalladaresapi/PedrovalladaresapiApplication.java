@@ -1,8 +1,5 @@
 package br.edu.infnet.pedrovalladaresapi;
 
-import br.edu.infnet.pedrovalladaresapi.model.domain.Cargo;
-import br.edu.infnet.pedrovalladaresapi.model.domain.Endereco;
-import br.edu.infnet.pedrovalladaresapi.model.domain.Funcionario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

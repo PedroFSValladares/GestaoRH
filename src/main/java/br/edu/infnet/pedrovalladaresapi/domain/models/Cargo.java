@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.model.domain;
+package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 public class Cargo {
     private int Id;
@@ -38,6 +38,8 @@ public class Cargo {
     }
 
     public void setRemuneracao(Double remuneracao) {
+        if (remuneracao == null || remuneracao <= 0)
+            throw new IllegalArgumentException("Valor de remuneração informado inválido!");
         Remuneracao = remuneracao;
     }
 
@@ -46,6 +48,8 @@ public class Cargo {
     }
 
     public void setValeAlimentacao(Double valeAlimentacao) {
+        if (valeAlimentacao == null || valeAlimentacao <= 0)
+            throw new IllegalArgumentException("Valor do vale alimentação informado inválido!");
         ValeAlimentacao = valeAlimentacao;
     }
 
@@ -54,6 +58,8 @@ public class Cargo {
     }
 
     public void setValeTransporte(Double valeTransporte) {
+        if (valeTransporte == null || valeTransporte <= 0)
+            throw new IllegalArgumentException("Valor do vale transporte informado inválido!");
         ValeTransporte = valeTransporte;
     }
 
@@ -78,6 +84,8 @@ public class Cargo {
     }
 
     public void setCargaHoraria(Integer cargaHoraria) {
+        if (cargaHoraria == null || cargaHoraria <= 0)
+            throw new IllegalArgumentException("Carga horária informada inválida!");
         CargaHoraria = cargaHoraria;
     }
 }

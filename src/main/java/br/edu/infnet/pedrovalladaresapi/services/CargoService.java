@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
-import br.edu.infnet.pedrovalladaresapi.model.domain.Cargo;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
 
 import java.util.List;
 import java.util.Map;

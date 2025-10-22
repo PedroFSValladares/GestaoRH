@@ -1,4 +1,6 @@
-package br.edu.infnet.pedrovalladaresapi.model.domain;
+package br.edu.infnet.pedrovalladaresapi.domain.models;
+
+import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -23,6 +25,8 @@ public class Ponto {
     }
 
     public void setFuncionario(Funcionario funcionario) {
+        if (funcionario == null)
+            throw new IllegalArgumentException("O funcionário não pode ser nulo!");
         Funcionario = funcionario;
     }
 

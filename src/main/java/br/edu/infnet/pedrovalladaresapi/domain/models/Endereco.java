@@ -1,5 +1,7 @@
-package br.edu.infnet.pedrovalladaresapi.model.domain;
+package br.edu.infnet.pedrovalladaresapi.domain.models;
 
+
+import br.edu.infnet.pedrovalladaresapi.domain.exceptions.CepInvalidoException;
 
 public class Endereco {
     private String CEP;
@@ -19,6 +21,10 @@ public class Endereco {
     }
 
     public void setCEP(String CEP) {
+        if(CEP.isEmpty())
+            throw new IllegalArgumentException("O CEP deve ser informado!");
+        else if(CEP.length() < 8)
+            throw new CepInvalidoException("O CEP informado é inválido");
         this.CEP = CEP;
     }
 
@@ -27,6 +33,8 @@ public class Endereco {
     }
 
     public void setLogradouro(String logradouro) {
+        if(logradouro.isEmpty())
+            throw new IllegalArgumentException("O logradouro do endereço deve ser informado!");
         this.Logradouro = logradouro;
     }
 
@@ -35,6 +43,8 @@ public class Endereco {
     }
 
     public void setComplemento(String complemento) {
+        if(complemento.isEmpty())
+            throw new IllegalArgumentException("O complemento do endereço deve ser informado!");
         Complemento = complemento;
     }
 
@@ -43,6 +53,8 @@ public class Endereco {
     }
 
     public void setBairro(String bairro) {
+        if(bairro.isEmpty())
+            throw new IllegalArgumentException("O bairro do endereço deve ser informado!");
         Bairro = bairro;
     }
 
@@ -51,6 +63,8 @@ public class Endereco {
     }
 
     public void setUF(String UF) {
+        if(UF.isEmpty())
+            throw new IllegalArgumentException("A UF do endereço deve ser informado!");
         this.UF = UF;
     }
 }

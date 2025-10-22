@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.model.domain;
+package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 public class Funcionario extends Pessoa{
     private String Matricula;
@@ -16,6 +16,8 @@ public class Funcionario extends Pessoa{
     }
 
     public void setMatricula(String matricula) {
+        if (matricula.isEmpty())
+            throw new IllegalArgumentException("Matricula deve ser preenchida!");
         Matricula = matricula;
     }
 
@@ -24,6 +26,8 @@ public class Funcionario extends Pessoa{
     }
 
     public void setCargo(Cargo cargo) {
+        if (cargo == null)
+            throw new IllegalArgumentException("O Cargo do funcionário não pode ser nulo!");
         Cargo = cargo;
     }
 

@@ -12,7 +12,37 @@ public abstract class Pessoa {
 
 
     private Boolean cpfValido(String cpf){
-        return false;
+        int somatorio = 0,
+                primeiroDigitoVerificador,
+                segundoDigitoVerificador;
+        char[] primeiraSequencia = new char[9],
+                segundaSequencia = new char[10];
+        String digitosVerificadoresOriginais = cpf.substring(9),
+                digitoVerificadorFinal;
+
+        cpf.getChars(0, 8, primeiraSequencia, 0);
+        cpf.getChars(0, 8, segundaSequencia, 0);
+
+        for(int i = 0,  multiplicador = 10; i < primeiraSequencia.length; i++, multiplicador--){
+            somatorio += (int) primeiraSequencia[i] * multiplicador;
+        }
+
+        int restoPrimeiraDivisao = somatorio % 11;
+        primeiroDigitoVerificador = restoPrimeiraDivisao < 2 ? 0 : 11 - restoPrimeiraDivisao;
+
+        segundaSequencia[9] = (char) primeiroDigitoVerificador;
+        somatorio = 0;
+
+        for(int i = 0,  multiplicador = 11; i < segundaSequencia.length; i++, multiplicador--){
+            somatorio += (int) segundaSequencia[i] * multiplicador;
+        }
+
+        int restoSegundaDivisao = somatorio % 11;
+        segundoDigitoVerificador = 11 - restoSegundaDivisao;
+
+        digitoVerificadorFinal = String.valueOf(primeiroDigitoVerificador) + String.valueOf(segundoDigitoVerificador);
+
+        return digitosVerificadoresOriginais.equals(digitoVerificadorFinal);
     }
 
     private Boolean emailValido(String email){

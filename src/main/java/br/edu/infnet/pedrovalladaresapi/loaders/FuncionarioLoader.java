@@ -32,7 +32,7 @@ public class FuncionarioLoader implements ApplicationRunner {
 
         while (linha != null){
             if(!cabecalho){
-                campos = linha.split("\t");
+               campos = linha.split("\t");
 
                 Funcionario funcionario = new Funcionario();
 
@@ -57,6 +57,7 @@ public class FuncionarioLoader implements ApplicationRunner {
                 funcionario.setCargo(cargo);
 
                 funcionariosService.incluir(funcionario);
+
             }
             linha = leitura.readLine();
             cabecalho = false;

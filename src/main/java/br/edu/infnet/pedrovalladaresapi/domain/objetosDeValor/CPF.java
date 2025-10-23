@@ -16,38 +16,21 @@ public class CPF {
     }
 
     public Boolean valido(){
-        int somatorio = 0,
-                primeiroDigitoVerificador,
+        int primeiroDigitoVerificador,
                 segundoDigitoVerificador;
-        int[] primeiraSequencia = new int[9],
-                segundaSequencia = new int[10];
         String digitosVerificadoresOriginais = cpf.substring(9),
                 digitoVerificadorFinal;
 
         char[] temp = new char[9];
 
         cpf.getChars(0, 9, temp, 0);
-        for(int i = 0; i < temp.length; i++){
-            primeiraSequencia[i] = Character.getNumericValue(temp[i]);
-            segundaSequencia[i] = Character.getNumericValue(temp[i]);
-        }
+        primeiroDigitoVerificador = calcularDigitoVerificador(temp);
 
-        for(int i = 0,  multiplicador = 10; i < primeiraSequencia.length; i++, multiplicador--){
-            somatorio += primeiraSequencia[i] * multiplicador;
-        }
+        temp = new char[10];
+        cpf.getChars(0, 9, temp, 0);
+        temp[9] = Character.forDigit(primeiroDigitoVerificador, 10);
 
-        int restoPrimeiraDivisao = somatorio % 11;
-        primeiroDigitoVerificador = restoPrimeiraDivisao < 2 ? 0 : 11 - restoPrimeiraDivisao;
-
-        segundaSequencia[9] = primeiroDigitoVerificador;
-        somatorio = 0;
-
-        for(int i = 0,  multiplicador = 11; i < segundaSequencia.length; i++, multiplicador--){
-            somatorio += segundaSequencia[i] * multiplicador;
-        }
-
-        int restoSegundaDivisao = somatorio % 11;
-        segundoDigitoVerificador = restoSegundaDivisao < 2 ? 0 : 11 - restoSegundaDivisao;
+        segundoDigitoVerificador = calcularDigitoVerificador(temp);
 
         digitoVerificadorFinal = String.valueOf(primeiroDigitoVerificador) + String.valueOf(segundoDigitoVerificador);
 
@@ -65,6 +48,20 @@ public class CPF {
 
         for(int i = 0,  peso = sequencia.length + 1; i < sequencia.length; i++, peso--){
             somatorio += sequencia[i] * peso;
+        }
+
+        int restoPrimeiraDivisao = somatorio % 11;
+        digitoVerificador = restoPrimeiraDivisao < 2 ? 0 : 11 - restoPrimeiraDivisao;
+
+        return digitoVerificador;
+    }
+
+    private int calcularDigitoVerificador(int[] digitos){
+        int somatorio = 0,
+                digitoVerificador;
+
+        for(int i = 0,  peso = digitos.length + 1; i < digitos.length; i++, peso--){
+            somatorio += digitos[i] * peso;
         }
 
         int restoPrimeiraDivisao = somatorio % 11;

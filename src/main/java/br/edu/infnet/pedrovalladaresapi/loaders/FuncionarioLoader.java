@@ -39,7 +39,7 @@ public class FuncionarioLoader implements ApplicationRunner {
                 funcionario.setNome(campos[0]);
                 funcionario.setCPF(campos[1]);
                 funcionario.setEmail(campos[2]);
-                funcionario.setEmail(campos[3]);
+                funcionario.setTelefone(campos[3]);
                 funcionario.setMatricula(campos[9]);
                 funcionario.setAtivo(true);
 

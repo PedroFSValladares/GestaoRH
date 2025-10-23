@@ -55,18 +55,4 @@ public class CPF {
 
         return digitoVerificador;
     }
-
-    private int calcularDigitoVerificador(int[] digitos){
-        int somatorio = 0,
-                digitoVerificador;
-
-        for(int i = 0,  peso = digitos.length + 1; i < digitos.length; i++, peso--){
-            somatorio += digitos[i] * peso;
-        }
-
-        int restoPrimeiraDivisao = somatorio % 11;
-        digitoVerificador = restoPrimeiraDivisao < 2 ? 0 : 11 - restoPrimeiraDivisao;
-
-        return digitoVerificador;
-    }
 }

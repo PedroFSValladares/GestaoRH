@@ -1,7 +1,13 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+
+@Entity
 public class Funcionario extends Pessoa{
     private String Matricula;
+
+    @Embedded
     private Cargo Cargo;
     private Boolean Ativo;
 

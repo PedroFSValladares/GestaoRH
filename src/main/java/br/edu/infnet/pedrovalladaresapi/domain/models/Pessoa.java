@@ -1,14 +1,23 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
+import br.edu.infnet.pedrovalladaresapi.converters.CpfConverter;
 import br.edu.infnet.pedrovalladaresapi.domain.exceptions.CpfInvalidoException;
 import br.edu.infnet.pedrovalladaresapi.domain.exceptions.EmailInvalidoException;
 import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
+import jakarta.persistence.*;
 
+@Entity
 public abstract class Pessoa {
+    @Id
     private String Nome;
+
+    @Convert(converter = CpfConverter.class)
+
     private CPF CPF;
     private String Email;
     private String Telefone;
+
+    @Embedded
     private Endereco Endereco;
 
 

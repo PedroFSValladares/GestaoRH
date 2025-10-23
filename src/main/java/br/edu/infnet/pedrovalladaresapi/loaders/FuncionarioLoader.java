@@ -23,13 +23,13 @@ public class FuncionarioLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        FileReader  arquivo = new FileReader("Funcionários.tsv");
+        FileReader  arquivo = new FileReader("FuncionáriosV2.tsv");
         BufferedReader leitura = new BufferedReader(arquivo);
 
         String linha = leitura.readLine();
         String[] campos = null;
         Boolean cabecalho = true;
-
+        /*
         while (linha != null){
             if(!cabecalho){
                campos = linha.split("\t");
@@ -67,5 +67,7 @@ public class FuncionarioLoader implements ApplicationRunner {
         funcionarios.forEach(System.out::println);
 
         leitura.close();
+        */
     }
+
 }

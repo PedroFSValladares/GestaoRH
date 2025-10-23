@@ -1,11 +1,15 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+@Entity
 public class Ponto {
+    @Id
     private Integer Id;
     private Funcionario Funcionario;
     private LocalDate Data;

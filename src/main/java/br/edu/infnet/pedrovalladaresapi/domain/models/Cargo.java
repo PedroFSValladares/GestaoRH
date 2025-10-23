@@ -1,6 +1,12 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Embeddable
 public class Cargo {
+    @Id
     private int Id;
     private String Nome;
     private Double Remuneracao;

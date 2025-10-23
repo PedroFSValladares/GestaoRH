@@ -2,8 +2,13 @@ package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 
 import br.edu.infnet.pedrovalladaresapi.domain.exceptions.CepInvalidoException;
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Embeddable
 public class Endereco {
+    @Id
     private String CEP;
     private String Logradouro;
     private String Complemento;

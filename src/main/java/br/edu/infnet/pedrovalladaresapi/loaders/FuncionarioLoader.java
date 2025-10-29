@@ -29,7 +29,7 @@ public class FuncionarioLoader implements ApplicationRunner {
         String linha = leitura.readLine();
         String[] campos = null;
         Boolean cabecalho = true;
-        /*
+
         while (linha != null){
             if(!cabecalho){
                campos = linha.split("\t");
@@ -52,6 +52,8 @@ public class FuncionarioLoader implements ApplicationRunner {
 
                 Cargo cargo = new Cargo();
                 cargo.setId(Integer.valueOf(campos[10]));
+                cargo.setAdicionalDeInsalubridade(false);
+                cargo.setAdicionalDePericulosidade(false);
 
                 funcionario.setEndereco(endereco);
                 funcionario.setCargo(cargo);
@@ -67,7 +69,7 @@ public class FuncionarioLoader implements ApplicationRunner {
         funcionarios.forEach(System.out::println);
 
         leitura.close();
-        */
+
     }
 
 }

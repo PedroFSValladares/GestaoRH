@@ -28,7 +28,7 @@ public class FuncionariosService implements ICrudService<Funcionario, String> {
     @Override
     public Funcionario alterar(String id, Funcionario funcionario) {
         if(!mapa.containsKey(id))
-            return null;
+            throw new NullPointerException();
         mapa.replace(id, funcionario);
 
         return funcionario;

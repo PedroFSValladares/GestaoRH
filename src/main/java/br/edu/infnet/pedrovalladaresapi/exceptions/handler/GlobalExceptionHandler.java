@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.exceptions.handler;
 
-import br.edu.infnet.pedrovalladaresapi.requests.ResponseRequest;
+import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -16,7 +16,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseRequest> handleMethodNotValidException(MethodArgumentNotValidException e){
+    public ResponseEntity<ResponseBody> handleMethodNotValidException(MethodArgumentNotValidException e){
         Map<String, String> mapa = new HashMap<>();
         
         //mapa.put("status", HttpStatus.BAD_REQUEST.toString());
@@ -28,11 +28,11 @@ public class GlobalExceptionHandler {
             mapa.put(nomeDoCampo, mensagem);
         });
         
-        return new ResponseEntity<ResponseRequest>(new ResponseRequest.BadRequest(mapa), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ResponseBody>( ResponseBody.BadRequest(mapa), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ResponseRequest> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
-        return new ResponseEntity<ResponseRequest>(new ResponseRequest.BadRequest("Verifique a formatação do corpo da requisição."), HttpStatus.BAD_REQUEST);
+    public ResponseEntity<ResponseBody> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
+        return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest("Verifique a formatação do corpo da requisição."), HttpStatus.BAD_REQUEST);
     }
 }

@@ -7,11 +7,12 @@ import jakarta.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Entity
+
 public class Ponto {
     @Id
     private Integer Id;
     private Funcionario Funcionario;
+
     private LocalDate Data;
     private LocalTime HorarioPonto;
     private TipoPonto TipoPonto;

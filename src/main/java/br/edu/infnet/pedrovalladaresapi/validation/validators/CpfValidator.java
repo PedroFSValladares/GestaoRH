@@ -8,7 +8,9 @@ import jakarta.validation.ConstraintValidatorContext;
 public class CpfValidator implements ConstraintValidator<ValidCpf, CPF>{
     @Override
     public boolean isValid(CPF cpf, ConstraintValidatorContext constraintValidatorContext) {
-        if(cpf.getCpf().isEmpty())
+        if(cpf == null)
+            return false;
+        else if(cpf.getCpf().isEmpty())
             return false;
 
         return cpf.valido();

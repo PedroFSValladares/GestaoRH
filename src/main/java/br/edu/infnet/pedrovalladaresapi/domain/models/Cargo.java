@@ -4,7 +4,6 @@ import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Embeddable
 public class Cargo {
     @Id
     private int Id;

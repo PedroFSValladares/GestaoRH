@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.exceptions;
+package br.edu.infnet.pedrovalladaresapi.exceptions;
 
 public class CepInvalidoException extends RuntimeException {
     public CepInvalidoException(String message) {

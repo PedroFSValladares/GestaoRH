@@ -1,20 +1,24 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
-import br.edu.infnet.pedrovalladaresapi.converters.CpfConverter;
-import br.edu.infnet.pedrovalladaresapi.domain.exceptions.CpfInvalidoException;
-import br.edu.infnet.pedrovalladaresapi.domain.exceptions.EmailInvalidoException;
 import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
+import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
 public abstract class Pessoa {
-    @Id
+
+    @NotEmpty(message = "O campo nome deve ser informado.")
     private String Nome;
-
-    @Convert(converter = CpfConverter.class)
-
+    //@Convert(converter = CpfConverter.class)
+    @NotNull(message = "O campo CPF deve ser informado.")
+    @ValidCpf
     private CPF CPF;
+    @NotEmpty(message = "O campo e-mail deve ser informado.")
+    @Email(message = "O e-mail informado não é válido.")
     private String Email;
+    @NotEmpty(message = "O campo telefone deve ser informado.")
     private String Telefone;
 
     @Embedded
@@ -36,8 +40,6 @@ public abstract class Pessoa {
     }
 
     public void setNome(String nome) {
-        if(nome.isEmpty())
-            throw new IllegalArgumentException("O nome da pessoa deve ser informado!");
         Nome = nome;
     }
 
@@ -46,14 +48,7 @@ public abstract class Pessoa {
     }
 
     public void setCPF(String cpf) {
-        if(cpf.isEmpty())
-            throw new IllegalArgumentException("CPF da pessoa deve ser informado!");
-
-        CPF novoCpf = new CPF(cpf);
-
-        if(!novoCpf.valido())
-            throw new CpfInvalidoException("O CPF informado não é válido!");
-        this.CPF = novoCpf;
+        this.CPF = new CPF(cpf);
     }
 
     public String getEmail() {
@@ -61,10 +56,6 @@ public abstract class Pessoa {
     }
 
     public void setEmail(String email) {
-        if(email.isEmpty())
-            throw new IllegalArgumentException("O Email da pessoa deve ser informado!");
-        else if (!emailValido(email))
-            throw new EmailInvalidoException("O e-mail informado é inválido!");
         Email = email;
     }
 
@@ -73,9 +64,6 @@ public abstract class Pessoa {
     }
 
     public void setTelefone(String telefone) {
-        if(telefone.isEmpty())
-            throw new IllegalArgumentException("O Email da pessoa deve ser informado!");
-
         Telefone = telefone;
     }
 

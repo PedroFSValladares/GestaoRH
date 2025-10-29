@@ -2,12 +2,15 @@ package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
-@Entity
+
 public class Funcionario extends Pessoa{
+    @NotEmpty(message = "O campo matrícula deve ser informado.")
     private String Matricula;
 
-    @Embedded
+    //@Embedded
     private Cargo Cargo;
     private Boolean Ativo;
 

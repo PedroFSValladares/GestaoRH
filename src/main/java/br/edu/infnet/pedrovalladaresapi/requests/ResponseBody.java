@@ -44,6 +44,13 @@ public class ResponseBody {
         return responseBody;
     }
 
+    public static ResponseBody Created(Object data){
+        ResponseBody responseBody = new ResponseBody();
+        responseBody.status = HttpStatus.CREATED;
+        responseBody.data = data;
+        return responseBody;
+    }
+
     public static ResponseBody BadRequest(Object data) {
         ResponseBody responseBody = new ResponseBody();
         responseBody.status = HttpStatus.BAD_REQUEST;

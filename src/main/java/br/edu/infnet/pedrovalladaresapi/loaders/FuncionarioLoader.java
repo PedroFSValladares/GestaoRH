@@ -3,22 +3,27 @@ package br.edu.infnet.pedrovalladaresapi.loaders;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.services.CargoService;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Collection;
 
+@Order(2)
 @Component
 public class FuncionarioLoader implements ApplicationRunner {
 
     private final FuncionariosService funcionariosService;
+    private final CargoService cargoService;
 
-    public FuncionarioLoader(FuncionariosService funcionariosService){
+    public FuncionarioLoader(FuncionariosService funcionariosService, CargoService cargoService){
         this.funcionariosService = funcionariosService;
+        this.cargoService = cargoService;
     }
 
     @Override
@@ -50,10 +55,8 @@ public class FuncionarioLoader implements ApplicationRunner {
                 endereco.setBairro(campos[7]);
                 endereco.setUF(campos[8]);
 
-                Cargo cargo = new Cargo();
-                cargo.setId(Integer.valueOf(campos[10]));
-                cargo.setAdicionalDeInsalubridade(false);
-                cargo.setAdicionalDePericulosidade(false);
+                Cargo cargo = cargoService.obterPorId(Integer.valueOf(campos[10]));
+                cargo.setAtivo(true);
 
                 funcionario.setEndereco(endereco);
                 funcionario.setCargo(cargo);

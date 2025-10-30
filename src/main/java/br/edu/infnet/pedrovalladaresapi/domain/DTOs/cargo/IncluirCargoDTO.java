@@ -1,12 +1,11 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.DTOs.cargo;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 
-public class Cargo {
-    private int Id;
+public class IncluirCargoDTO {
     @NotEmpty(message = "O Campo nome deve ser informado.")
     private String Nome;
     @NotNull(message = "O campo Remuneração deve ser informado.")
@@ -25,22 +24,6 @@ public class Cargo {
     @NotNull(message = "O campo carga horária deve ser informado.")
     @Positive(message = "A carga horária deve ser maior que 0.")
     private Integer CargaHoraria;
-    private Boolean Ativo;
-
-    @Override
-    public String toString(){
-        return String.format("Cargo: %s | Id: %d | Carga Horária: %d | Remuneração: %.2f | Vale Alimentação: %.2f | Vale Transporte: %.2f | Periculosidade: %s | Insalubridade: %s",
-                Nome, Id, CargaHoraria, Remuneracao, ValeAlimentacao, ValeTransporte,
-                AdicionalDePericulosidade ? "Sim" : "Não", AdicionalDeInsalubridade ? "Sim" : "Não");
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
-    }
 
     public String getNome() {
         return Nome;
@@ -96,13 +79,5 @@ public class Cargo {
 
     public void setCargaHoraria(Integer cargaHoraria) {
         CargaHoraria = cargaHoraria;
-    }
-
-    public Boolean getAtivo() {
-        return Ativo;
-    }
-
-    public void setAtivo(Boolean ativo) {
-        Ativo = ativo;
     }
 }

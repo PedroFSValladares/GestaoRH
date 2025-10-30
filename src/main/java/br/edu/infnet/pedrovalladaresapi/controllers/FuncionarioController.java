@@ -1,8 +1,10 @@
 package br.edu.infnet.pedrovalladaresapi.controllers;
 
+import br.edu.infnet.pedrovalladaresapi.clients.ViaCepFeignClient;
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.AlterarFuncionarioDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.IncluirFuncionarioDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.factories.FuncionarioFactory;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;
@@ -17,9 +19,11 @@ import org.springframework.web.bind.annotation.*;
 public class FuncionarioController {
 
     private final FuncionariosService funcionariosService;
+    private final ViaCepFeignClient viaCepFeignClient;
 
-    public FuncionarioController(FuncionariosService funcionariosService){
+    public FuncionarioController(FuncionariosService funcionariosService, ViaCepFeignClient viaCepFeignClient){
         this.funcionariosService = funcionariosService;
+        this.viaCepFeignClient = viaCepFeignClient;
     }
 
     @PostMapping
@@ -72,6 +76,13 @@ public class FuncionarioController {
             responseBody = ResponseBody.Ok(funcionario);
         }
 
+        return ResponseEntity.status(responseBody.getStatus()).body(responseBody);
+    }
+
+    @GetMapping("/endereco/{cep}")
+    public ResponseEntity<ResponseBody> obterEnderecoPeloCep(@PathVariable String cep){
+        Endereco endereco = viaCepFeignClient.findByCep(cep);
+        var responseBody = endereco.getCEP() == null ? ResponseBody.NotFound() : ResponseBody.Ok(endereco);
         return ResponseEntity.status(responseBody.getStatus()).body(responseBody);
     }
 }

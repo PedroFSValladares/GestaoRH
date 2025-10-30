@@ -33,6 +33,6 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ResponseBody> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
-        return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest("Verifique a formatação do corpo da requisição."), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

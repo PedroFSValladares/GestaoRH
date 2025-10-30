@@ -6,7 +6,9 @@ import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.IncluirFuncionar
 import br.edu.infnet.pedrovalladaresapi.domain.factories.FuncionarioFactory;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
 import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
+import br.edu.infnet.pedrovalladaresapi.services.FolhaDeFrequenciaService;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

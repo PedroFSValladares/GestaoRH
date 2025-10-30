@@ -5,6 +5,9 @@ import jakarta.persistence.Entity;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 public class Funcionario extends Pessoa{
     @NotEmpty(message = "O campo matrícula deve ser informado.")
@@ -42,5 +45,14 @@ public class Funcionario extends Pessoa{
 
     public Boolean getAtivo(){
         return Ativo;
+    }
+
+    public Ponto criarPonto(){
+        Ponto ponto = new Ponto();
+        ponto.setCpfFuncionario(this.getCPF());
+        ponto.setHorarioPonto(LocalTime.now());
+        ponto.setData(LocalDate.now());
+
+        return ponto;
     }
 }

@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
-import jakarta.persistence.Entity;
+import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
 import jakarta.persistence.Id;
 
 import java.time.LocalDate;
@@ -11,15 +11,17 @@ import java.time.LocalTime;
 public class Ponto {
     @Id
     private Integer Id;
-    private Funcionario Funcionario;
-
+    //private Funcionario Funcionario;
+    private CPF cpfFuncionario;
     private LocalDate Data;
     private LocalTime HorarioPonto;
     private TipoPonto TipoPonto;
 
+    /*
     public Funcionario getFuncionario() {
         return Funcionario;
     }
+     */
 
     public void setId(Integer id){
         Id = id;
@@ -29,11 +31,14 @@ public class Ponto {
         return Id;
     }
 
+    /*
     public void setFuncionario(Funcionario funcionario) {
         if (funcionario == null)
             throw new IllegalArgumentException("O funcionário não pode ser nulo!");
         Funcionario = funcionario;
     }
+
+     */
 
     public LocalDate getData() {
         return Data;
@@ -57,5 +62,13 @@ public class Ponto {
 
     public void setTipoPonto(TipoPonto tipoPonto) {
         TipoPonto = tipoPonto;
+    }
+
+    public String getCpfFuncionario() {
+        return cpfFuncionario.getCpf();
+    }
+
+    public void setCpfFuncionario(String cpfFuncionario) {
+        this.cpfFuncionario = new CPF(cpfFuncionario);
     }
 }

@@ -1,24 +1,34 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
-import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 public class Cargo {
-    @Id
     private int Id;
+    @NotEmpty(message = "O Campo nome deve ser informado.")
     private String Nome;
+    @NotNull(message = "O campo Remuneração deve ser informado.")
+    @Positive(message = "A remuneração deve ser maior que 0.")
     private Double Remuneracao;
+    @NotNull(message = "O campo Vale alimentação deve ser informado.")
+    @PositiveOrZero(message = "O vale alimentação não pode ser negativo.")
     private Double ValeAlimentacao;
+    @NotNull(message = "O campo Vale transporte deve ser informado.")
+    @PositiveOrZero(message = "O vale transporte não pode ser negativo.")
     private Double ValeTransporte;
     private Boolean AdicionalDePericulosidade;
     private Boolean AdicionalDeInsalubridade;
+    @NotNull(message = "O campo carga horária deve ser informado.")
+    @Positive(message = "A carga horária deve ser maior que 0.")
     private Integer CargaHoraria;
+    private Boolean Ativo;
 
     @Override
     public String toString(){
-        return String.format("Nome: %s\nCarga Horária: %d\nRemuneração: %.2f\nVale Alimentação: %.2f\nVale Transporte: %.2f\nPericulosidade: %s\nInsalubridade: %s",
-                Nome, CargaHoraria, Remuneracao, ValeAlimentacao, ValeTransporte,
+        return String.format("Cargo: %s | Id: %d | Carga Horária: %d | Remuneração: %.2f | Vale Alimentação: %.2f | Vale Transporte: %.2f | Periculosidade: %s | Insalubridade: %s",
+                Nome, Id, CargaHoraria, Remuneracao, ValeAlimentacao, ValeTransporte,
                 AdicionalDePericulosidade ? "Sim" : "Não", AdicionalDeInsalubridade ? "Sim" : "Não");
     }
 
@@ -43,8 +53,6 @@ public class Cargo {
     }
 
     public void setRemuneracao(Double remuneracao) {
-        if (remuneracao == null || remuneracao <= 0)
-            throw new IllegalArgumentException("Valor de remuneração informado inválido!");
         Remuneracao = remuneracao;
     }
 
@@ -53,8 +61,6 @@ public class Cargo {
     }
 
     public void setValeAlimentacao(Double valeAlimentacao) {
-        if (valeAlimentacao == null || valeAlimentacao <= 0)
-            throw new IllegalArgumentException("Valor do vale alimentação informado inválido!");
         ValeAlimentacao = valeAlimentacao;
     }
 
@@ -63,8 +69,6 @@ public class Cargo {
     }
 
     public void setValeTransporte(Double valeTransporte) {
-        if (valeTransporte == null || valeTransporte <= 0)
-            throw new IllegalArgumentException("Valor do vale transporte informado inválido!");
         ValeTransporte = valeTransporte;
     }
 
@@ -89,8 +93,14 @@ public class Cargo {
     }
 
     public void setCargaHoraria(Integer cargaHoraria) {
-        if (cargaHoraria == null || cargaHoraria <= 0)
-            throw new IllegalArgumentException("Carga horária informada inválida!");
         CargaHoraria = cargaHoraria;
+    }
+
+    public Boolean getAtivo() {
+        return Ativo;
+    }
+
+    public void setAtivo(Boolean ativo) {
+        Ativo = ativo;
     }
 }

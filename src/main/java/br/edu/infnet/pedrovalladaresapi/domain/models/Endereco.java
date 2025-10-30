@@ -14,7 +14,7 @@ public class Endereco {
 
     @Override
     public String toString(){
-        return String.format("CEP: %s\nLogradouro: %s\nComplemento: %s\nBairro: %s\nUF: %s",
+        return String.format("CEP: %s | Logradouro: %s | Complemento: %s | Bairro: %s | UF: %s",
                 CEP, Logradouro, Complemento, Bairro, UF);
     }
 

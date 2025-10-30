@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.controllers;
 
-import br.edu.infnet.pedrovalladaresapi.domain.DTOs.AlterarFuncionarioDTO;
-import br.edu.infnet.pedrovalladaresapi.domain.DTOs.IncluirFuncionarioDTO;
+import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.AlterarFuncionarioDTO;
+import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.IncluirFuncionarioDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.factories.FuncionarioFactory;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;

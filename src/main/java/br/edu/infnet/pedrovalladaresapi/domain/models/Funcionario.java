@@ -16,7 +16,7 @@ public class Funcionario extends Pessoa{
 
     @Override
     public String toString(){
-        return String.format("%s\nMatrícula: %s\nAtivo: %s\n%s",
+        return String.format("%s | Matrícula: %s | Ativo: %s | %s",
                 super.toString() ,Matricula, Ativo ? "Sim" : "Não", Cargo.toString());
     }
 

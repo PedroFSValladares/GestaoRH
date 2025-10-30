@@ -15,6 +15,11 @@ public class CPF {
         this.cpf = cpf;
     }
 
+    @Override
+    public String toString(){
+        return cpf;
+    }
+
     public Boolean valido(){
         int primeiroDigitoVerificador,
                 segundoDigitoVerificador;

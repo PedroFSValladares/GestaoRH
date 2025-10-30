@@ -25,13 +25,9 @@ public abstract class Pessoa {
     private Endereco Endereco;
 
 
-    private Boolean emailValido(String email){
-        return email.matches("^[^@\\s]+@[^@\\s]+(\\.com|\\.com\\.br)$");
-    }
-
     @Override
     public String toString(){
-        return String.format("Nome: %s\nCPF: %s\nEmail: %s\nTelefone: %s\n%s",
+        return String.format("Nome: %s | CPF: %s | Email: %s | Telefone: %s | %s",
                 Nome, CPF, Email, Telefone, Endereco.toString());
     }
 

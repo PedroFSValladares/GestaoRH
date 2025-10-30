@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.DTOs;
+package br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario;
 
 import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;

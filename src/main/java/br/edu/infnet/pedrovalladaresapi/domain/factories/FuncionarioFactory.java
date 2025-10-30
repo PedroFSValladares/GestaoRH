@@ -1,7 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.domain.factories;
 
-import br.edu.infnet.pedrovalladaresapi.domain.DTOs.IncluirFuncionarioDTO;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
+import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.IncluirFuncionarioDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 
 public class FuncionarioFactory {

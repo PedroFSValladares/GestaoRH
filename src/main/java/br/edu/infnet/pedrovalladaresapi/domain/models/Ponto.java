@@ -16,7 +16,6 @@ public class Ponto {
     @ManyToOne
     @JoinColumn(name = "cpf")
     private Funcionario Funcionario;
-    //private CPF cpfFuncionario;
     @Column(name = "data")
     private LocalDate Data;
     @Column(name = "hora")
@@ -65,14 +64,4 @@ public class Ponto {
     public void setTipoPonto(TipoPonto tipoPonto) {
         TipoPonto = tipoPonto;
     }
-/*
-    public String getCpfFuncionario() {
-        return cpfFuncionario.getCpf();
-    }
-
-    public void setCpfFuncionario(String cpfFuncionario) {
-        this.cpfFuncionario = new CPF(cpfFuncionario);
-    }
-
- */
 }

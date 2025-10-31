@@ -50,7 +50,7 @@ public class Funcionario extends Pessoa{
 
     public Ponto criarPonto(){
         Ponto ponto = new Ponto();
-        ponto.getFuncionario().setCpf(this.getCpf());
+        ponto.setFuncionario(this);
         ponto.setHorarioPonto(LocalTime.now());
         ponto.setData(LocalDate.now());
 

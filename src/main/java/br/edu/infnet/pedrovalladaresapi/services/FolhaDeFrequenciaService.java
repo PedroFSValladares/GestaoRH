@@ -20,7 +20,7 @@ public class FolhaDeFrequenciaService implements ICrudService<Ponto, Integer> {
 
     @Override
     public Ponto incluir(Ponto ponto) {
-        var pontos = obterPorDataEFuncionario(ponto.getData(), ponto.getFuncionario().getCPF());
+        var pontos = obterPorDataEFuncionario(ponto.getData(), ponto.getFuncionario().getCpf());
 
         if (pontos.isEmpty())
             ponto.setTipoPonto(TipoPonto.Entrada);
@@ -68,14 +68,14 @@ public class FolhaDeFrequenciaService implements ICrudService<Ponto, Integer> {
     public List<Ponto> obterPorDataEFuncionario(LocalDate data, String cpf){
         var pontos = mapa.values();
 
-        pontos = pontos.stream().filter((p -> p.getData().equals(data) && p.getFuncionario().getCPF().equals(cpf))).toList();
+        pontos = pontos.stream().filter((p -> p.getData().equals(data) && p.getFuncionario().getCpf().equals(cpf))).toList();
 
         return new ArrayList<>(pontos);
     }
 
     public List<Ponto> obterPorMesEFuncionario(Integer mes, String cpf){
         List<Ponto> pontos = new ArrayList<>();
-        pontos = mapa.values().stream().filter((p) -> p.getData().getMonth().getValue() == mes && p.getFuncionario().getCPF().equals(cpf)).toList();
+        pontos = mapa.values().stream().filter((p) -> p.getData().getMonth().getValue() == mes && p.getFuncionario().getCpf().equals(cpf)).toList();
         return pontos;
     }
 }

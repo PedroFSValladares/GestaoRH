@@ -1,7 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
-import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

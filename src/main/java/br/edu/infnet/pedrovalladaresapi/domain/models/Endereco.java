@@ -6,19 +6,26 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "enderecos")
 public class Endereco {
     @Id
     @Column(name = "cep")
+    @Size(min = 8, max = 8, message = "O CEP informado não é válido.")
+    @NotEmpty(message = "O CEP deve ser informado.")
     private String CEP;
+    @NotEmpty(message = "O Logradouro deve ser informado")
     @Column(name = "logradouro")
     private String Logradouro;
     @Column(name = "complemento")
     private String Complemento;
+    @NotEmpty(message = "O bairro deve ser informado")
     @Column(name = "bairro")
     private String Bairro;
+    @NotEmpty(message = "A UF deve ser informada")
     @Column(name = "uf")
     private String UF;
 

@@ -1,5 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
+import br.edu.infnet.pedrovalladaresapi.domain.repositories.IEnderecoRespository;
+import br.edu.infnet.pedrovalladaresapi.domain.repositories.IFuncionarioRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 import org.springframework.stereotype.Service;
@@ -11,45 +13,49 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class FuncionariosService implements ICrudService<Funcionario, String> {
+    private final IFuncionarioRepository funcionarioRepository;
+    private final IEnderecoRespository enderecoRespository;
 
-    private final Map<String, Funcionario> mapa = new ConcurrentHashMap<String, Funcionario>();
+    public FuncionariosService(IFuncionarioRepository funcionarioRepository, IEnderecoRespository enderecoRespository){
+        this.funcionarioRepository = funcionarioRepository;
+        this.enderecoRespository = enderecoRespository;
+    }
 
     @Override
     public Funcionario incluir(Funcionario funcionario) {
-        mapa.put(funcionario.getCPF(), funcionario);
-        return funcionario;
+        var endereco = enderecoRespository.findById(funcionario.getEndereco().getCEP());
+        if(endereco.isEmpty())
+            enderecoRespository.save(funcionario.getEndereco());
+        return funcionarioRepository.save(funcionario);
     }
 
     @Override
     public List<Funcionario> listarTodos() {
-        return new ArrayList<>(mapa.values());
+        return funcionarioRepository.findAll();
     }
 
     @Override
     public Funcionario alterar(String id, Funcionario funcionario) {
-        if(!mapa.containsKey(id))
+        if(!funcionarioRepository.existsById(id))
             return null;
-        mapa.replace(id, funcionario);
-
-        return funcionario;
+        return funcionarioRepository.save(funcionario);
     }
 
     @Override
     public void deletar(String CPF) {
-        mapa.remove(CPF);
+        funcionarioRepository.deleteById(CPF);
     }
 
     public void inativar(String CPF){
-        if(!mapa.containsKey(CPF))
-            throw new NullPointerException();
-
-        Funcionario funcionario = mapa.get(CPF);
-        funcionario.setAtivo(false);
-        mapa.replace(CPF, funcionario);
+        Funcionario funcionario = obterPorCPF(CPF);
+        if(funcionario != null){
+            funcionario.setAtivo(false);
+            funcionarioRepository.save(funcionario);
+        }
     }
 
     public Funcionario obterPorCPF(String CPF){
-        var funcioanrio = mapa.get(CPF);
-        return funcioanrio;
+        var funcionario = funcionarioRepository.findById(CPF);
+        return funcionario.orElse(null);
     }
 }

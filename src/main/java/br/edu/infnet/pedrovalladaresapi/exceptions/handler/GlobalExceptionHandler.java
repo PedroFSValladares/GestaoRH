@@ -1,6 +1,8 @@
 package br.edu.infnet.pedrovalladaresapi.exceptions.handler;
 
 import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -34,5 +36,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ResponseBody> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
         return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest(e.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ResponseBody> handleConstraintViolationException(ConstraintViolationException e){
+        var violation = e.getConstraintViolations();
+        var violations = violation.stream().map(ConstraintViolation::getMessage).toList();
+        return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest(violations), HttpStatus.BAD_REQUEST);
     }
 }

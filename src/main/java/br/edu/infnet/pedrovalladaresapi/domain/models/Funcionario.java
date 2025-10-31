@@ -2,18 +2,17 @@ package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Random;
 
 @Entity
 public class Funcionario extends Pessoa{
     @Column(name = "matricula", unique = true)
     @NotEmpty(message = "O campo matrícula deve ser informado.")
     private String Matricula;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo Cargo;
     @Column(name = "ativo")
@@ -51,10 +50,15 @@ public class Funcionario extends Pessoa{
 
     public Ponto criarPonto(){
         Ponto ponto = new Ponto();
-        ponto.getFuncionario().setCPF(this.getCPF());
+        ponto.getFuncionario().setCpf(this.getCpf());
         ponto.setHorarioPonto(LocalTime.now());
         ponto.setData(LocalDate.now());
 
         return ponto;
+    }
+
+    public String gerarMatricula(){
+        Random random = new Random();
+        return getCpf().substring(0, 3) + getTelefone().substring(6) + random.nextInt(10);
     }
 }

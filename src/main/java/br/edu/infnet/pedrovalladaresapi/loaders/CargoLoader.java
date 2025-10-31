@@ -44,6 +44,7 @@ public class CargoLoader implements ApplicationRunner {
                 cargo.setAdicionalDePericulosidade(campos[5].equals("Sim"));
                 cargo.setAdicionalDeInsalubridade(campos[6].equals("Sim"));
                 cargo.setCargaHoraria(Integer.valueOf(campos[7]));
+                cargo.setAtivo(true);
 
                 cargoService.incluir(cargo);
 

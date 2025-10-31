@@ -1,8 +1,11 @@
 package br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario;
 
-import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
-import jakarta.validation.constraints.*;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public class IncluirFuncionarioDTO {
     @NotEmpty(message = "O campo nome deve ser informado.")
@@ -10,19 +13,16 @@ public class IncluirFuncionarioDTO {
     //@Convert(converter = CpfConverter.class)
     @NotNull(message = "O campo CPF deve ser informado.")
     @ValidCpf
-    private CPF CPF;
+    private String CPF;
     @NotEmpty(message = "O campo e-mail deve ser informado.")
     @Email(message = "O e-mail informado não é válido.")
     private String Email;
     @NotEmpty(message = "O campo telefone deve ser informado.")
     private String Telefone;
-    @NotEmpty(message = "O campo matrícula deve ser informado.")
-    private String Matricula;
     @NotNull(message = "O campo cargo deve ser informado.")
     private Integer CargoId;
-    @NotEmpty(message = "O campo CEP deve ser informado.")
-    @Size(min = 8, max = 8, message = "O CEP informado não é válido.")
-    private String Cep;
+    @NotNull(message = "O Endereço deve ser informado.")
+    private Endereco endereco;
 
     public String getNome() {
         return Nome;
@@ -33,11 +33,11 @@ public class IncluirFuncionarioDTO {
     }
 
     public String getCPF() {
-        return CPF.getCpf();
+        return CPF;
     }
 
     public void setCPF(String CPF) {
-        this.CPF = new CPF(CPF);
+        this.CPF = CPF;
     }
 
     public String getEmail() {
@@ -56,14 +56,6 @@ public class IncluirFuncionarioDTO {
         Telefone = telefone;
     }
 
-    public String getMatricula() {
-        return Matricula;
-    }
-
-    public void setMatricula(String matricula) {
-        Matricula = matricula;
-    }
-
     public int getCargoId() {
         return CargoId;
     }
@@ -72,11 +64,11 @@ public class IncluirFuncionarioDTO {
         CargoId = cargoId;
     }
 
-    public String getCep() {
-        return Cep;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setCep(String cep) {
-        Cep = cep;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 }

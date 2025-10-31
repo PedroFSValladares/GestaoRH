@@ -1,15 +1,10 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
-import br.edu.infnet.pedrovalladaresapi.converters.CpfConverter;
-import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.JdbcType;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 @Entity
 @Table(name = "pessoas")
@@ -18,11 +13,9 @@ public abstract class Pessoa {
 
     @Id
     @Column(name = "cpf")
-    @Convert(converter = CpfConverter.class)
-    @JdbcTypeCode(SqlTypes.VARCHAR)
     @NotNull(message = "O campo CPF deve ser informado.")
     @ValidCpf
-    private CPF CPF;
+    private String Cpf;
     @Column(name = "email")
     @NotEmpty(message = "O campo e-mail deve ser informado.")
     @Email(message = "O e-mail informado não é válido.")
@@ -42,7 +35,7 @@ public abstract class Pessoa {
     @Override
     public String toString(){
         return String.format("Nome: %s | CPF: %s | Email: %s | Telefone: %s | %s",
-                Nome, CPF, Email, Telefone, Endereco.toString());
+                Nome, Cpf, Email, Telefone, Endereco.toString());
     }
 
     public String getNome() {
@@ -53,12 +46,12 @@ public abstract class Pessoa {
         Nome = nome;
     }
 
-    public String getCPF() {
-        return CPF.getCpf();
+    public String getCpf() {
+        return Cpf;
     }
 
-    public void setCPF(String cpf) {
-        this.CPF = new CPF(cpf);
+    public void setCpf(String cpf) {
+        this.Cpf = cpf;
     }
 
     public String getEmail() {
@@ -82,8 +75,47 @@ public abstract class Pessoa {
     }
 
     public void setEndereco(Endereco endereco) {
-        if(endereco == null)
-            throw new IllegalArgumentException("Endereço deve ser informado!");
         Endereco = endereco;
+    }
+
+    public static Boolean cpfValido(String cpf){
+        int primeiroDigitoVerificador,
+                segundoDigitoVerificador;
+        String digitosVerificadoresOriginais = cpf.substring(9),
+                digitoVerificadorFinal;
+
+        char[] temp = new char[9];
+
+        cpf.getChars(0, 9, temp, 0);
+        primeiroDigitoVerificador = calcularDigitoVerificador(temp);
+
+        temp = new char[10];
+        cpf.getChars(0, 9, temp, 0);
+        temp[9] = Character.forDigit(primeiroDigitoVerificador, 10);
+
+        segundoDigitoVerificador = calcularDigitoVerificador(temp);
+
+        digitoVerificadorFinal = String.valueOf(primeiroDigitoVerificador) + String.valueOf(segundoDigitoVerificador);
+
+        return digitosVerificadoresOriginais.equals(digitoVerificadorFinal);
+    }
+
+    private static int calcularDigitoVerificador(char[] caracteres){
+        int somatorio = 0,
+                digitoVerificador;
+        int[] sequencia = new int[caracteres.length];
+
+        for(int i = 0; i < caracteres.length; i++)
+            sequencia[i] = Character.getNumericValue(caracteres[i]);
+
+
+        for(int i = 0,  peso = sequencia.length + 1; i < sequencia.length; i++, peso--){
+            somatorio += sequencia[i] * peso;
+        }
+
+        int restoPrimeiraDivisao = somatorio % 11;
+        digitoVerificador = restoPrimeiraDivisao < 2 ? 0 : 11 - restoPrimeiraDivisao;
+
+        return digitoVerificador;
     }
 }

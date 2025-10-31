@@ -1,5 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
+import br.edu.infnet.pedrovalladaresapi.domain.repositories.ICargoRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
 import org.springframework.stereotype.Service;
@@ -15,12 +16,15 @@ public class CargoService implements ICrudService<Cargo, Integer> {
 
     private final Map<Integer, Cargo> mapa = new ConcurrentHashMap<Integer, Cargo>();
     private final AtomicInteger id = new AtomicInteger(1);
+    private final ICargoRepository cargoRepository;
+
+    public CargoService(ICargoRepository cargoRepository){
+        this.cargoRepository = cargoRepository;
+    }
+
     @Override
     public Cargo incluir(Cargo cargo) {
-        int novoId = id.getAndIncrement();
-        cargo.setId(novoId);
-        mapa.put(novoId, cargo);
-        return cargo;
+        return cargoRepository.save(cargo);
     }
 
     @Override

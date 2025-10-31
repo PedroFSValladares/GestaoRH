@@ -1,5 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.loaders;
 
+import br.edu.infnet.pedrovalladaresapi.clients.ViaCepFeignClient;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
@@ -19,11 +20,9 @@ import java.util.Collection;
 public class FuncionarioLoader implements ApplicationRunner {
 
     private final FuncionariosService funcionariosService;
-    private final CargoService cargoService;
 
-    public FuncionarioLoader(FuncionariosService funcionariosService, CargoService cargoService){
+    public FuncionarioLoader(FuncionariosService funcionariosService){
         this.funcionariosService = funcionariosService;
-        this.cargoService = cargoService;
     }
 
     @Override
@@ -42,21 +41,28 @@ public class FuncionarioLoader implements ApplicationRunner {
                 Funcionario funcionario = new Funcionario();
 
                 funcionario.setNome(campos[0]);
-                funcionario.setCPF(campos[1]);
+                funcionario.setCpf(campos[1]);
                 funcionario.setEmail(campos[2]);
-                funcionario.setTelefone(campos[3]);
-                funcionario.setMatricula(campos[9]);
+
+                String telefone = campos[3].replace("(","")
+                        .replace(")", "")
+                        .replace("-","")
+                        .replace(" ", "");
+
+                funcionario.setTelefone(telefone);
+                funcionario.setMatricula(funcionario.gerarMatricula());
                 funcionario.setAtivo(true);
 
+                String cep = campos[4].replace("-", "");
                 Endereco endereco = new Endereco();
-                endereco.setCEP(campos[4]);
+                endereco.setCEP(cep);
                 endereco.setLogradouro(campos[5]);
                 endereco.setComplemento(campos[6]);
                 endereco.setBairro(campos[7]);
                 endereco.setUF(campos[8]);
 
-                Cargo cargo = cargoService.obterPorId(Integer.valueOf(campos[10]));
-                cargo.setAtivo(true);
+                Cargo cargo = new Cargo();
+                cargo.setId(Integer.parseInt(campos[10]));
 
                 funcionario.setEndereco(endereco);
                 funcionario.setCargo(cargo);

@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 @Table(name = "enderecos")
 public class Endereco {
     @Id
-    @Column(name = "cep")
+    @Column(name = "cep", length = 8)
     @Size(min = 8, max = 8, message = "O CEP informado não é válido.")
     @NotEmpty(message = "O CEP deve ser informado.")
     private String CEP;
@@ -26,7 +26,7 @@ public class Endereco {
     @Column(name = "bairro")
     private String Bairro;
     @NotEmpty(message = "A UF deve ser informada")
-    @Column(name = "uf")
+    @Column(name = "uf", length = 2)
     private String UF;
 
     @Override

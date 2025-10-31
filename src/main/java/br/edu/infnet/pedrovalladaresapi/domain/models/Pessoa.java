@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 public abstract class Pessoa {
 
     @Id
-    @Column(name = "cpf")
+    @Column(name = "cpf", length = 11)
     @NotNull(message = "O campo CPF deve ser informado.")
     @ValidCpf
     private String Cpf;
@@ -23,7 +23,7 @@ public abstract class Pessoa {
     @Column(name = "nome")
     @NotEmpty(message = "O campo nome deve ser informado.")
     private String Nome;
-    @Column(name = "telefone")
+    @Column(name = "telefone", length = 11)
     @NotEmpty(message = "O campo telefone deve ser informado.")
     private String Telefone;
 

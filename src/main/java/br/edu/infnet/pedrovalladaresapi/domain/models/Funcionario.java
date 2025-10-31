@@ -9,7 +9,7 @@ import java.util.Random;
 
 @Entity
 public class Funcionario extends Pessoa{
-    @Column(name = "matricula", unique = true)
+    @Column(name = "matricula", unique = true, length = 8)
     @NotEmpty(message = "O campo matrícula deve ser informado.")
     private String Matricula;
     @ManyToOne
@@ -59,6 +59,7 @@ public class Funcionario extends Pessoa{
 
     public String gerarMatricula(){
         Random random = new Random();
-        return getCpf().substring(0, 3) + getTelefone().substring(6) + random.nextInt(10);
+        String matricula = getCpf().substring(0, 3) + getTelefone().substring(7) + random.nextInt(10);
+        return String.format("%" + 8 + "s", matricula).replace(" ","0");
     }
 }

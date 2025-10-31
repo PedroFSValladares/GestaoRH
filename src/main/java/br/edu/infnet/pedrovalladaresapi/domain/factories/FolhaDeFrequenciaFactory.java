@@ -15,24 +15,31 @@ import java.util.Map;
 public class FolhaDeFrequenciaFactory {
     public static FolhaDeFrequencia gerarFolhaDeFrequencia(Funcionario funcionario, List<Ponto> pontos){
         FolhaDeFrequencia folhaDeFrequencia = new FolhaDeFrequencia();
-        Map<LocalDate, DiaUtil> mapa = new HashMap<>();
+        Map<LocalDate, DiaUtil> entradas = new HashMap<>();
+        Map<LocalDate, DiaUtil> saidas = new HashMap<>();
 
         pontos.forEach(ponto -> {
-            if (!mapa.containsKey(ponto.getData())){
-                DiaUtil diaUtil = new DiaUtil();
-                diaUtil.setData(ponto.getData());
-                mapa.put(ponto.getData(), diaUtil);
-            } else if (ponto.getTipoPonto() == TipoPonto.Entrada) {
-                var diaUtil = mapa.get(ponto.getData());
+
+            DiaUtil diaUtil = new DiaUtil();
+            diaUtil.setData(ponto.getData());
+
+            if (ponto.getTipoPonto().equals(TipoPonto.Entrada)){
                 diaUtil.setEntrada(ponto.getHorarioPonto());
-                mapa.replace(ponto.getData(), diaUtil);
-            } else if (ponto.getTipoPonto() == TipoPonto.Saida) {
-                var diaUtil = mapa.get(ponto.getData());
+                entradas.put(diaUtil.getData(), diaUtil);
+            }
+
+            if (ponto.getTipoPonto().equals(TipoPonto.Saida)){
                 diaUtil.setSaida(ponto.getHorarioPonto());
-                mapa.replace(ponto.getData(), diaUtil);
+                saidas.put(diaUtil.getData(), diaUtil);
             }
         });
-        folhaDeFrequencia.setDiasFrequentados(new ArrayList<>(mapa.values()));
+
+        entradas.forEach((localDate, diaUtil) -> {
+            var diaSaida = saidas.get(localDate);
+            diaUtil.setSaida(diaSaida.getSaida());
+        });
+
+        folhaDeFrequencia.setDiasFrequentados(new ArrayList<>(entradas.values()));
         folhaDeFrequencia.setFuncionario(funcionario);
 
         return folhaDeFrequencia;

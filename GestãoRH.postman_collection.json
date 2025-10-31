@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"nome\": \"Pedro Valladares\",\n    \"cpf\": \"05194273193\",\n    \"email\": \"pedro.valladares@hotmail.com\",\n    \"telefone\": \"(61) 984801565\",\n    \"matricula\": \"12345678\",\n    \"cep\": \"12345678\",\n    \"cargoId\": 10\n}",
+							"raw": "{\n\t\"nome\": \"Pedro Valladares\",\n    \"cpf\": \"05194273193\",\n    \"email\": \"pedro.valladares@hotmail.com\",\n    \"telefone\": \"984801565\",\n    \"cargoId\": 10,\n    \"endereco\": {\n        \"cep\": \"12345678\",\n        \"logradouro\": \"logradouro teste\",\n        \"complemento\": \"\",\n        \"bairro\": \"Itaquarema\",\n        \"uf\": \"MA\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"

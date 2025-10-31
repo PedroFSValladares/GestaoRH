@@ -1,15 +1,12 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
+import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IEnderecoRespository;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IFuncionarioRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class FuncionariosService implements ICrudService<Funcionario, String> {

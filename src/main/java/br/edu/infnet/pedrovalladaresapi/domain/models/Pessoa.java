@@ -1,27 +1,41 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
+import br.edu.infnet.pedrovalladaresapi.converters.CpfConverter;
 import br.edu.infnet.pedrovalladaresapi.domain.objetosDeValor.CPF;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
+@Entity
+@Table(name = "pessoas")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Pessoa {
 
-    @NotEmpty(message = "O campo nome deve ser informado.")
-    private String Nome;
-    //@Convert(converter = CpfConverter.class)
+    @Id
+    @Column(name = "cpf")
+    @Convert(converter = CpfConverter.class)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     @NotNull(message = "O campo CPF deve ser informado.")
     @ValidCpf
     private CPF CPF;
+    @Column(name = "email")
     @NotEmpty(message = "O campo e-mail deve ser informado.")
     @Email(message = "O e-mail informado não é válido.")
     private String Email;
+    @Column(name = "nome")
+    @NotEmpty(message = "O campo nome deve ser informado.")
+    private String Nome;
+    @Column(name = "telefone")
     @NotEmpty(message = "O campo telefone deve ser informado.")
     private String Telefone;
 
-    @Embedded
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cep")
     private Endereco Endereco;
 
 

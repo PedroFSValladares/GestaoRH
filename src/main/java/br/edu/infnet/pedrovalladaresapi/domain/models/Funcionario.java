@@ -1,20 +1,22 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-
+@Entity
 public class Funcionario extends Pessoa{
+    @Column(name = "matricula", unique = true)
     @NotEmpty(message = "O campo matrícula deve ser informado.")
     private String Matricula;
 
-    //@Embedded
+    @OneToOne
+    @JoinColumn(name = "cargo_id")
     private Cargo Cargo;
+    @Column(name = "ativo")
     private Boolean Ativo;
 
     @Override
@@ -49,7 +51,7 @@ public class Funcionario extends Pessoa{
 
     public Ponto criarPonto(){
         Ponto ponto = new Ponto();
-        ponto.setCpfFuncionario(this.getCPF());
+        ponto.getFuncionario().setCPF(this.getCPF());
         ponto.setHorarioPonto(LocalTime.now());
         ponto.setData(LocalDate.now());
 

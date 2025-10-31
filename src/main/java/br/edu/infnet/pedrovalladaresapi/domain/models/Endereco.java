@@ -2,14 +2,24 @@ package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 
 import br.edu.infnet.pedrovalladaresapi.exceptions.CepInvalidoException;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "enderecos")
 public class Endereco {
     @Id
+    @Column(name = "cep")
     private String CEP;
+    @Column(name = "logradouro")
     private String Logradouro;
+    @Column(name = "complemento")
     private String Complemento;
+    @Column(name = "bairro")
     private String Bairro;
+    @Column(name = "uf")
     private String UF;
 
     @Override

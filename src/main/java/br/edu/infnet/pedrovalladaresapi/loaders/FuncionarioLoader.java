@@ -17,7 +17,7 @@ import java.util.Collection;
 
 @Order(2)
 @Component
-public class FuncionarioLoader implements ApplicationRunner {
+public class FuncionarioLoader extends BaseLoader implements ApplicationRunner {
 
     private final FuncionariosService funcionariosService;
 
@@ -27,58 +27,47 @@ public class FuncionarioLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        FileReader  arquivo = new FileReader("FuncionáriosV2.tsv");
-        BufferedReader leitura = new BufferedReader(arquivo);
-
-        String linha = leitura.readLine();
         String[] campos = null;
-        Boolean cabecalho = true;
 
-        while (linha != null){
-            if(!cabecalho){
-               campos = linha.split("\t");
+        var linhas = obterLinhasDeArquivo("FuncionáriosV2.tsv", true);
 
-                Funcionario funcionario = new Funcionario();
+        for (String linha : linhas){
+            campos = linha.split("\t");
 
-                funcionario.setNome(campos[0]);
-                funcionario.setCpf(campos[1]);
-                funcionario.setEmail(campos[2]);
+            Funcionario funcionario = new Funcionario();
 
-                String telefone = campos[3].replace("(","")
-                        .replace(")", "")
-                        .replace("-","")
-                        .replace(" ", "");
+            funcionario.setNome(campos[0]);
+            funcionario.setCpf(campos[1]);
+            funcionario.setEmail(campos[2]);
 
-                funcionario.setTelefone(telefone);
-                funcionario.setMatricula(funcionario.gerarMatricula());
-                funcionario.setAtivo(true);
+            String telefone = campos[3].replace("(","")
+                    .replace(")", "")
+                    .replace("-","")
+                    .replace(" ", "");
 
-                String cep = campos[4].replace("-", "");
-                Endereco endereco = new Endereco();
-                endereco.setCEP(cep);
-                endereco.setLogradouro(campos[5]);
-                endereco.setComplemento(campos[6]);
-                endereco.setBairro(campos[7]);
-                endereco.setUF(campos[8]);
+            funcionario.setTelefone(telefone);
+            funcionario.setMatricula(funcionario.gerarMatricula());
+            funcionario.setAtivo(true);
 
-                Cargo cargo = new Cargo();
-                cargo.setId(Integer.parseInt(campos[10]));
+            String cep = campos[4].replace("-", "");
+            Endereco endereco = new Endereco();
+            endereco.setCEP(cep);
+            endereco.setLogradouro(campos[5]);
+            endereco.setComplemento(campos[6]);
+            endereco.setBairro(campos[7]);
+            endereco.setUF(campos[8]);
 
-                funcionario.setEndereco(endereco);
-                funcionario.setCargo(cargo);
+            Cargo cargo = new Cargo();
+            cargo.setId(Integer.parseInt(campos[10]));
 
-                funcionariosService.incluir(funcionario);
+            funcionario.setEndereco(endereco);
+            funcionario.setCargo(cargo);
 
-            }
-            linha = leitura.readLine();
-            cabecalho = false;
+            funcionariosService.incluir(funcionario);
         }
 
         Collection<Funcionario> funcionarios = funcionariosService.listarTodos();
         funcionarios.forEach(System.out::println);
-
-        leitura.close();
-
     }
 
 }

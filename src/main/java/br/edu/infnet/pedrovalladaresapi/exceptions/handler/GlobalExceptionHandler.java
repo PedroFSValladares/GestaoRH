@@ -20,9 +20,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseBody> handleMethodNotValidException(MethodArgumentNotValidException e){
         Map<String, String> mapa = new HashMap<>();
-        
-        //mapa.put("status", HttpStatus.BAD_REQUEST.toString());
-        //mapa.put("timestamp", LocalDateTime.now().toString());
 
         e.getBindingResult().getAllErrors().forEach((erro) -> {
             var nomeDoCampo = ((FieldError) erro).getField();
@@ -30,18 +27,18 @@ public class GlobalExceptionHandler {
             mapa.put(nomeDoCampo, mensagem);
         });
         
-        return new ResponseEntity<ResponseBody>( ResponseBody.BadRequest(mapa), HttpStatus.BAD_REQUEST);
+        return ResponseBody.getByCode(HttpStatus.BAD_REQUEST, mapa);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ResponseBody> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
-        return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest(e.getMessage()), HttpStatus.BAD_REQUEST);
+        return ResponseBody.getByCode(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ResponseBody> handleConstraintViolationException(ConstraintViolationException e){
         var violation = e.getConstraintViolations();
         var violations = violation.stream().map(ConstraintViolation::getMessage).toList();
-        return new ResponseEntity<ResponseBody>(ResponseBody.BadRequest(violations), HttpStatus.BAD_REQUEST);
+        return ResponseBody.getByCode(HttpStatus.BAD_REQUEST, violations);
     }
 }

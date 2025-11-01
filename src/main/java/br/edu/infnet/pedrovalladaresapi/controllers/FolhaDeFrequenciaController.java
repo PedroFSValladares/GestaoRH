@@ -7,6 +7,7 @@ import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
 import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
 import br.edu.infnet.pedrovalladaresapi.services.FolhaDeFrequenciaService;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,8 +29,7 @@ public class FolhaDeFrequenciaController {
         Ponto ponto = funcionario.criarPonto();
         ponto = folhaDeFrequenciaService.incluir(ponto);
 
-        ResponseBody responseBody = ponto == null ? ResponseBody.BadRequest("Não é possível registrar nenhuma entrada ou saída mais.") : ResponseBody.Created(ponto);
-        return ResponseEntity.status(responseBody.getStatus()).body(responseBody);
+        return ponto == null ? ResponseBody.getByCode(HttpStatus.BAD_REQUEST, "Não é possível registrar nenhuma entrada ou saída mais.") : ResponseBody.getByCode(HttpStatus.CREATED, ponto);
     }
 
     @GetMapping("/{cpf}/{mes}")
@@ -39,11 +39,10 @@ public class FolhaDeFrequenciaController {
         var pontos = folhaDeFrequenciaService.obterPorMesEFuncionario(mes, cpf);
 
         if(funcionario == null)
-            responseBody = ResponseBody.NotFound();
+            return ResponseBody.getByCode(HttpStatus.NOT_FOUND, null);
         else{
             FolhaDeFrequencia folhaDeFrequencia = FolhaDeFrequenciaFactory.gerarFolhaDeFrequencia(funcionario, pontos);
-            responseBody = ResponseBody.Ok(folhaDeFrequencia);
+            return ResponseBody.getByCode(HttpStatus.OK, folhaDeFrequencia);
         }
-        return ResponseEntity.status(responseBody.getStatus()).body(responseBody);
     }
 }

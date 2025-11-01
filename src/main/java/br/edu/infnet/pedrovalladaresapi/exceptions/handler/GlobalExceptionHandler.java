@@ -18,6 +18,11 @@ import java.util.Map;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<RequestResponse> handleException(Exception e){
+        return RequestResponse.getByCode(HttpStatus.INTERNAL_SERVER_ERROR, "Ocorreu um erro inesperado no servidor: " + e.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<RequestResponse> handleMethodNotValidException(MethodArgumentNotValidException e){
         Map<String, String> mapa = new HashMap<>();

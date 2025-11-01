@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -15,6 +16,9 @@ public class Funcionario extends Pessoa{
     @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo Cargo;
+    @OneToMany()
+    @JoinColumn(name = "viagem_id")
+    private List<Viagem> viagens;
     @Column(name = "ativo")
     private Boolean Ativo;
 
@@ -61,5 +65,13 @@ public class Funcionario extends Pessoa{
         Random random = new Random();
         String matricula = getCpf().substring(0, 3) + getTelefone().substring(7) + random.nextInt(10);
         return String.format("%" + 8 + "s", matricula).replace(" ","0");
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
     }
 }

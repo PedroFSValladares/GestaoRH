@@ -29,7 +29,7 @@ public class FuncionarioLoader extends BaseLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         String[] campos = null;
 
-        var linhas = obterLinhasDeArquivo("FuncionáriosV2.tsv", true);
+        var linhas = obterLinhasDeArquivo("Dados/FuncionáriosV2.tsv", true);
 
         for (String linha : linhas){
             campos = linha.split("\t");

@@ -25,7 +25,7 @@ public class CargoLoader extends BaseLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        var linhas = obterLinhasDeArquivo("Cargos.tsv", true);
+        var linhas = obterLinhasDeArquivo("Dados/Cargos.tsv", true);
         String[] campos = null;
 
         for (String linha : linhas){

@@ -17,7 +17,7 @@ import java.util.Collection;
 
 @Order(2)
 @Component
-public class FuncionarioLoader extends BaseLoader implements ApplicationRunner {
+public class FuncionarioLoader extends BaseLoader{
 
     private final FuncionariosService funcionariosService;
 

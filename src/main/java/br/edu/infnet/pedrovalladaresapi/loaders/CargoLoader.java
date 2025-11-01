@@ -15,7 +15,7 @@ import java.util.Collection;
 
 @Order(1)
 @Component
-public class CargoLoader extends BaseLoader implements ApplicationRunner {
+public class CargoLoader extends BaseLoader {
 
     private final CargoService cargoService;
 

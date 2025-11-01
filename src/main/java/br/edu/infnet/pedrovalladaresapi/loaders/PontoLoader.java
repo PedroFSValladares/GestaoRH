@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 @Order(3)
 @Component
-public class PontoLoader extends BaseLoader implements ApplicationRunner {
+public class PontoLoader extends BaseLoader {
 
     private final FolhaDeFrequenciaService folhaDeFrequenciaService;
 

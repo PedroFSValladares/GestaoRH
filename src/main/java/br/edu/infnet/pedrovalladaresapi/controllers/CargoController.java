@@ -9,7 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
+import br.edu.infnet.pedrovalladaresapi.requests.RequestResponse;
 
 @RestController
 @RequestMapping("/api/cargos")
@@ -22,31 +22,31 @@ public class CargoController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseBody> incluir(@Valid @RequestBody IncluirCargoDTO incluirCargoDTO){
+    public ResponseEntity<RequestResponse> incluir(@Valid @RequestBody IncluirCargoDTO incluirCargoDTO){
         Cargo cargo = CargoFactory.criarCargo(incluirCargoDTO);
         cargo = cargoService.incluir(cargo);
 
-        return ResponseBody.getByCode(HttpStatus.CREATED, cargo);
+        return RequestResponse.getByCode(HttpStatus.CREATED, cargo);
     }
 
     @GetMapping
-    public ResponseEntity<ResponseBody> listarTodos(){
+    public ResponseEntity<RequestResponse> listarTodos(){
         var cargos = cargoService.listarTodos();
-        return cargos.isEmpty() ? ResponseBody.getByCode(HttpStatus.NO_CONTENT, null) : ResponseBody.getByCode(HttpStatus.OK, cargos);
+        return cargos.isEmpty() ? RequestResponse.getByCode(HttpStatus.NO_CONTENT, null) : RequestResponse.getByCode(HttpStatus.OK, cargos);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ResponseBody> obterPorId(@PathVariable Integer id){
+    public ResponseEntity<RequestResponse> obterPorId(@PathVariable Integer id){
         Cargo cargo = cargoService.obterPorId(id);
-        return cargo == null ? ResponseBody.getByCode(HttpStatus.NOT_FOUND, null) : ResponseBody.getByCode(HttpStatus.OK ,cargo);
+        return cargo == null ? RequestResponse.getByCode(HttpStatus.NOT_FOUND, null) : RequestResponse.getByCode(HttpStatus.OK ,cargo);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ResponseBody> alterar(@PathVariable Integer id, @Valid @RequestBody AlterarCargoDTO alterarCargoDTO){
+    public ResponseEntity<RequestResponse> alterar(@PathVariable Integer id, @Valid @RequestBody AlterarCargoDTO alterarCargoDTO){
         Cargo cargo = cargoService.obterPorId(id);
 
         if(cargo == null)
-            return ResponseBody.getByCode(HttpStatus.NOT_FOUND, null);
+            return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);
         else{
             cargo.setNome(alterarCargoDTO.getNome());
             cargo.setRemuneracao(alterarCargoDTO.getRemuneracao());
@@ -57,18 +57,18 @@ public class CargoController {
             cargo.setCargaHoraria(alterarCargoDTO.getCargaHoraria());
 
             cargo = cargoService.alterar(id, cargo);
-            return ResponseBody.getByCode(HttpStatus.OK, cargo);
+            return RequestResponse.getByCode(HttpStatus.OK, cargo);
         }
     }
 
     @PatchMapping("/inativar/{id}")
-    public ResponseEntity<ResponseBody> inativar(@PathVariable Integer id){
+    public ResponseEntity<RequestResponse> inativar(@PathVariable Integer id){
         Cargo cargo = cargoService.obterPorId(id);
         if(cargo == null)
-             return ResponseBody.getByCode(HttpStatus.NOT_FOUND, null);
+             return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);
         else{
             cargoService.inativar(id);
-            return ResponseBody.getByCode(HttpStatus.NO_CONTENT, null);
+            return RequestResponse.getByCode(HttpStatus.NO_CONTENT, null);
         }
     }
 }

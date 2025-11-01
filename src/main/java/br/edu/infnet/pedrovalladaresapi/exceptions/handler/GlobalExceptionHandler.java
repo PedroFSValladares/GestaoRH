@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.exceptions.handler;
 
-import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
+import br.edu.infnet.pedrovalladaresapi.requests.RequestResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLDataException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseBody> handleMethodNotValidException(MethodArgumentNotValidException e){
+    public ResponseEntity<RequestResponse> handleMethodNotValidException(MethodArgumentNotValidException e){
         Map<String, String> mapa = new HashMap<>();
 
         e.getBindingResult().getAllErrors().forEach((erro) -> {
@@ -27,18 +28,18 @@ public class GlobalExceptionHandler {
             mapa.put(nomeDoCampo, mensagem);
         });
         
-        return ResponseBody.getByCode(HttpStatus.BAD_REQUEST, mapa);
+        return RequestResponse.getByCode(HttpStatus.BAD_REQUEST, mapa);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ResponseBody> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
-        return ResponseBody.getByCode(HttpStatus.BAD_REQUEST, e.getMessage());
+    public ResponseEntity<RequestResponse> handleHttpMessageNotReadableException(HttpMessageNotReadableException e){
+        return RequestResponse.getByCode(HttpStatus.BAD_REQUEST, e.getMessage());
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ResponseBody> handleConstraintViolationException(ConstraintViolationException e){
+    public ResponseEntity<RequestResponse> handleConstraintViolationException(ConstraintViolationException e){
         var violation = e.getConstraintViolations();
         var violations = violation.stream().map(ConstraintViolation::getMessage).toList();
-        return ResponseBody.getByCode(HttpStatus.BAD_REQUEST, violations);
+        return RequestResponse.getByCode(HttpStatus.BAD_REQUEST, violations);
     }
 }

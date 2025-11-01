@@ -1,9 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class AlterarFuncionarioDTO {
     @NotEmpty(message = "O campo nome deve ser informado.")
@@ -12,6 +9,7 @@ public class AlterarFuncionarioDTO {
     @Email(message = "O e-mail informado não é válido.")
     private String Email;
     @NotEmpty(message = "O campo telefone deve ser informado.")
+    @Size(min = 10, max = 11, message = "O Numero de telefone informado é inválido.")
     private String Telefone;
     @NotNull(message = "O campo cargo deve ser informado.")
     private Integer CargoId;

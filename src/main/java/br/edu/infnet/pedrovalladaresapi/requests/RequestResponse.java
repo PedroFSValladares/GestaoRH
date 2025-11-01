@@ -5,12 +5,12 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 
-public class ResponseBody {
+public class RequestResponse {
     private HttpStatus status;
     private LocalDateTime timestamp;
     private Object data;
 
-    public ResponseBody(){
+    public RequestResponse(){
         timestamp = LocalDateTime.now();
     }
 
@@ -38,10 +38,10 @@ public class ResponseBody {
         this.data = data;
     }
 
-    public static ResponseEntity<ResponseBody> getByCode(HttpStatus status, Object data){
-        ResponseBody responseBody = new ResponseBody();
-        responseBody.status = status;
-        responseBody.data = data;
-        return ResponseEntity.status(responseBody.getStatus()).body(responseBody);
+    public static ResponseEntity<RequestResponse> getByCode(HttpStatus status, Object data){
+        RequestResponse requestResponse = new RequestResponse();
+        requestResponse.status = status;
+        requestResponse.data = data;
+        return ResponseEntity.status(requestResponse.getStatus()).body(requestResponse);
     }
 }

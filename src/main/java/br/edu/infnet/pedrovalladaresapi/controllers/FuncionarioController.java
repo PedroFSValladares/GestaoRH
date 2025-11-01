@@ -6,9 +6,7 @@ import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.IncluirFuncionar
 import br.edu.infnet.pedrovalladaresapi.domain.factories.FuncionarioFactory;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
-import br.edu.infnet.pedrovalladaresapi.requests.ResponseBody;
-import br.edu.infnet.pedrovalladaresapi.services.FolhaDeFrequenciaService;
+import br.edu.infnet.pedrovalladaresapi.requests.RequestResponse;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -29,29 +27,29 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseBody> incluir(@Valid @RequestBody IncluirFuncionarioDTO funcionario){
+    public ResponseEntity<RequestResponse> incluir(@Valid @RequestBody IncluirFuncionarioDTO funcionario){
         Funcionario funcionarioAIncluir = FuncionarioFactory.criarFuncionario(funcionario);
         funcionariosService.incluir(funcionarioAIncluir);
-        return ResponseBody.getByCode(HttpStatus.CREATED, funcionario);
+        return RequestResponse.getByCode(HttpStatus.CREATED, funcionario);
     }
 
     @GetMapping("/{cpf}")
-    public ResponseEntity<ResponseBody> obterPorCPF(@PathVariable String cpf){
+    public ResponseEntity<RequestResponse> obterPorCPF(@PathVariable String cpf){
         var funcionario = funcionariosService.obterPorCPF(cpf);
-        return funcionario == null ? ResponseBody.getByCode(HttpStatus.NOT_FOUND, null) : ResponseBody.getByCode(HttpStatus.OK, funcionario);
+        return funcionario == null ? RequestResponse.getByCode(HttpStatus.NOT_FOUND, null) : RequestResponse.getByCode(HttpStatus.OK, funcionario);
     }
 
     @GetMapping
-    public ResponseEntity<ResponseBody> obterTodos(){
+    public ResponseEntity<RequestResponse> obterTodos(){
         var funcionarios = funcionariosService.listarTodos();
-        return funcionarios.isEmpty() ? ResponseBody.getByCode(HttpStatus.NO_CONTENT, null) : ResponseBody.getByCode(HttpStatus.OK, funcionarios);
+        return funcionarios.isEmpty() ? RequestResponse.getByCode(HttpStatus.NO_CONTENT, null) : RequestResponse.getByCode(HttpStatus.OK, funcionarios);
     }
 
     @PutMapping("/{cpf}")
-    public ResponseEntity<ResponseBody> alterar(@PathVariable String cpf, @RequestBody AlterarFuncionarioDTO funcionarioParaAtualizar){
+    public ResponseEntity<RequestResponse> alterar(@PathVariable String cpf, @Valid @RequestBody AlterarFuncionarioDTO funcionarioParaAtualizar){
         var funcionario = funcionariosService.obterPorCPF(cpf);
         if(funcionario == null)
-            return ResponseBody.getByCode(HttpStatus.NOT_FOUND, null);
+            return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);
         else{
             funcionario.setNome(funcionarioParaAtualizar.getNome());
             funcionario.setTelefone(funcionarioParaAtualizar.getTelefone());
@@ -59,24 +57,24 @@ public class FuncionarioController {
             funcionario.setAtivo(funcionarioParaAtualizar.getAtivo());
 
             funcionariosService.alterar(cpf, funcionario);
-            return ResponseBody.getByCode(HttpStatus.OK, funcionario);
+            return RequestResponse.getByCode(HttpStatus.OK, funcionario);
         }
     }
 
     @PatchMapping("/inativar/{cpf}")
-    public ResponseEntity<ResponseBody> inativar(@PathVariable String cpf){
+    public ResponseEntity<RequestResponse> inativar(@PathVariable String cpf){
         var funcionario = funcionariosService.obterPorCPF(cpf);
         if(funcionario == null)
-            return ResponseBody.getByCode(HttpStatus.NOT_FOUND, null);
+            return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);
         else {
             funcionariosService.inativar(cpf);
-            return ResponseBody.getByCode(HttpStatus.NO_CONTENT, null);
+            return RequestResponse.getByCode(HttpStatus.NO_CONTENT, null);
         }
     }
 
     @GetMapping("/endereco/{cep}")
-    public ResponseEntity<ResponseBody> obterEnderecoPeloCep(@PathVariable String cep){
+    public ResponseEntity<RequestResponse> obterEnderecoPeloCep(@PathVariable String cep){
         Endereco endereco = viaCepFeignClient.findByCep(cep);
-        return endereco.getCEP() == null ? ResponseBody.getByCode(HttpStatus.NOT_FOUND, null) : ResponseBody.getByCode(HttpStatus.OK, endereco);
+        return endereco.getCEP() == null ? RequestResponse.getByCode(HttpStatus.NOT_FOUND, null) : RequestResponse.getByCode(HttpStatus.OK, endereco);
     }
 }

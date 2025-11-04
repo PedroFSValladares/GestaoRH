@@ -1,8 +1,14 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
+import br.edu.infnet.pedrovalladaresapi.domain.DTOs.viagem.IncluirViagemDTO;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Transporte;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Viagem;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IEnderecoRespository;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IFuncionarioRepository;
+import br.edu.infnet.pedrovalladaresapi.domain.repositories.ITransporteRepository;
+import br.edu.infnet.pedrovalladaresapi.domain.repositories.IViagemRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +18,12 @@ import java.util.List;
 public class FuncionariosService implements ICrudService<Funcionario, String> {
     private final IFuncionarioRepository funcionarioRepository;
     private final IEnderecoRespository enderecoRespository;
+    private final IViagemRepository viagemRepository;
 
-    public FuncionariosService(IFuncionarioRepository funcionarioRepository, IEnderecoRespository enderecoRespository){
+    public FuncionariosService(IFuncionarioRepository funcionarioRepository, IEnderecoRespository enderecoRespository, IViagemRepository viagemRepository){
         this.funcionarioRepository = funcionarioRepository;
         this.enderecoRespository = enderecoRespository;
+        this.viagemRepository = viagemRepository;
     }
 
     @Override
@@ -23,6 +31,8 @@ public class FuncionariosService implements ICrudService<Funcionario, String> {
         var endereco = enderecoRespository.findById(funcionario.getEndereco().getCEP());
         if(endereco.isEmpty())
             enderecoRespository.save(funcionario.getEndereco());
+        if(funcionario.getViagens() != null)
+            viagemRepository.saveAll(funcionario.getViagens());
         return funcionarioRepository.save(funcionario);
     }
 
@@ -35,6 +45,10 @@ public class FuncionariosService implements ICrudService<Funcionario, String> {
     public Funcionario alterar(String id, Funcionario funcionario) {
         if(!funcionarioRepository.existsById(id))
             return null;
+
+        viagemRepository.saveAll(funcionario.getViagens());
+        enderecoRespository.save(funcionario.getEndereco());
+
         return funcionarioRepository.save(funcionario);
     }
 
@@ -54,5 +68,13 @@ public class FuncionariosService implements ICrudService<Funcionario, String> {
     public Funcionario obterPorCPF(String CPF){
         var funcionario = funcionarioRepository.findById(CPF);
         return funcionario.orElse(null);
+    }
+
+    public Funcionario adicionarViagem(String cpf, List<Viagem> viagens){
+        var funcionario = obterPorCPF(cpf);
+        if(funcionario == null)
+            return null;
+        funcionario.setViagens(viagens);
+        return funcionarioRepository.save(funcionario);
     }
 }

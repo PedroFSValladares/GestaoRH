@@ -15,6 +15,7 @@ public class FuncionarioFactory {
         funcionario.setTelefone(funcionarioDTO.getTelefone());
         funcionario.setMatricula(funcionario.gerarMatricula());
         funcionario.setEndereco(funcionarioDTO.getEndereco());
+        funcionario.setViagens(funcionarioDTO.getViagens());
 
         Cargo cargo = new Cargo();
         cargo.setId(funcionarioDTO.getCargoId());

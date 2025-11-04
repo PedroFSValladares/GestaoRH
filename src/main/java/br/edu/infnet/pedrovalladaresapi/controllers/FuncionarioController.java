@@ -28,9 +28,14 @@ public class FuncionarioController {
 
     @PostMapping
     public ResponseEntity<RequestResponse> incluir(@Valid @RequestBody IncluirFuncionarioDTO funcionario){
+        if(funcionariosService.obterPorCPF(funcionario.getCPF()) != null)
+            return RequestResponse.getByCode(HttpStatus.CONFLICT, "Já existe um funcionário com este CPF.");
+
         Funcionario funcionarioAIncluir = FuncionarioFactory.criarFuncionario(funcionario);
-        funcionariosService.incluir(funcionarioAIncluir);
-        return RequestResponse.getByCode(HttpStatus.CREATED, funcionario);
+
+        var novoFuncionario = funcionariosService.incluir(funcionarioAIncluir);
+
+        return RequestResponse.getByCode(HttpStatus.CREATED, novoFuncionario);
     }
 
     @GetMapping("/{cpf}")
@@ -55,9 +60,11 @@ public class FuncionarioController {
             funcionario.setTelefone(funcionarioParaAtualizar.getTelefone());
             funcionario.setEmail(funcionarioParaAtualizar.getEmail());
             funcionario.setAtivo(funcionarioParaAtualizar.getAtivo());
+            funcionario.setEndereco(funcionarioParaAtualizar.getEndereco());
+            funcionario.setViagens(funcionarioParaAtualizar.getViagens());
 
-            funcionariosService.alterar(cpf, funcionario);
-            return RequestResponse.getByCode(HttpStatus.OK, funcionario);
+            var funcionarioAtualizado = funcionariosService.alterar(cpf, funcionario);
+            return RequestResponse.getByCode(HttpStatus.OK, funcionarioAtualizado);
         }
     }
 

@@ -2,6 +2,7 @@ package br.edu.infnet.pedrovalladaresapi.domain.models;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,7 +18,11 @@ public class Funcionario extends Pessoa{
     @JoinColumn(name = "cargo_id")
     private Cargo Cargo;
     @OneToMany()
-    @JoinColumn(name = "viagem_id")
+    @JoinTable(
+            name = "funcionario_viagens",
+            joinColumns = @JoinColumn(name = "cpf"),
+            inverseJoinColumns = @JoinColumn(name = "viagem_id")
+    )
     private List<Viagem> viagens;
     @Column(name = "ativo")
     private Boolean Ativo;

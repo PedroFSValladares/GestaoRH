@@ -1,9 +1,15 @@
 package br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario;
 
 import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Viagem;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
+import br.edu.infnet.pedrovalladaresapi.validation.annotations.ViagemValida;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.util.List;
 
 public class IncluirFuncionarioDTO {
     @NotEmpty(message = "O campo nome deve ser informado.")
@@ -20,6 +26,8 @@ public class IncluirFuncionarioDTO {
     private String Telefone;
     @NotNull(message = "O campo cargo deve ser informado.")
     private Integer CargoId;
+    @ViagemValida
+    private List<Viagem> viagens;
     @NotNull(message = "O Endereço deve ser informado.")
     private Endereco endereco;
 
@@ -69,5 +77,13 @@ public class IncluirFuncionarioDTO {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
     }
 }

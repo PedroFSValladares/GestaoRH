@@ -13,6 +13,7 @@ public class Viagem {
     private int id;
     @ManyToOne()
     @JoinColumn(name = "codigo_linha", nullable = false)
+    @NotNull(message = "O transporte deve ser infomado.")
     private Transporte transporte;
     @Column(name = "tipo_viagem", nullable = false)
     @NotNull(message = "O tipo da viagem deve ser informado.")

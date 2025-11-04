@@ -12,7 +12,7 @@ import jakarta.validation.constraints.NotNull;
 public abstract class Pessoa {
 
     @Id
-    @Column(name = "cpf", length = 11)
+    @Column(name = "cpf", length = 11, unique = true)
     @NotNull(message = "O campo CPF deve ser informado.")
     @ValidCpf
     private String Cpf;
@@ -27,7 +27,7 @@ public abstract class Pessoa {
     @NotEmpty(message = "O campo telefone deve ser informado.")
     private String Telefone;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "cep")
     private Endereco Endereco;
 

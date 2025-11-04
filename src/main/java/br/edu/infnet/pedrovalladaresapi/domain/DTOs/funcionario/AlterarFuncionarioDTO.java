@@ -1,6 +1,11 @@
 package br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario;
 
+import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
+import br.edu.infnet.pedrovalladaresapi.domain.models.Viagem;
+import br.edu.infnet.pedrovalladaresapi.validation.annotations.ViagemValida;
 import jakarta.validation.constraints.*;
+
+import java.util.List;
 
 public class AlterarFuncionarioDTO {
     @NotEmpty(message = "O campo nome deve ser informado.")
@@ -13,9 +18,10 @@ public class AlterarFuncionarioDTO {
     private String Telefone;
     @NotNull(message = "O campo cargo deve ser informado.")
     private Integer CargoId;
-    @NotEmpty(message = "O campo CEP deve ser informado.")
-    @Size(min = 8, max = 8, message = "O CEP informado não é válido.")
-    private String Cep;
+    @NotNull(message = "O endereço deve ser informado.")
+    private Endereco endereco;
+    @ViagemValida
+    private List<Viagem> viagens;
     private Boolean ativo;
 
     public String getNome() {
@@ -50,12 +56,20 @@ public class AlterarFuncionarioDTO {
         CargoId = cargoId;
     }
 
-    public String getCep() {
-        return Cep;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setCep(String cep) {
-        Cep = cep;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public List<Viagem> getViagens() {
+        return viagens;
+    }
+
+    public void setViagens(List<Viagem> viagens) {
+        this.viagens = viagens;
     }
 
     public Boolean getAtivo() {

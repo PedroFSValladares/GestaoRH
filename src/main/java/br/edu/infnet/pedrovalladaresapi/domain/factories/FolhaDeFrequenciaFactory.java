@@ -6,6 +6,7 @@ import br.edu.infnet.pedrovalladaresapi.domain.models.FolhaDeFrequencia;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
 import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class FolhaDeFrequenciaFactory {
         FolhaDeFrequencia folhaDeFrequencia = new FolhaDeFrequencia();
         Map<LocalDate, DiaUtil> entradas = new HashMap<>();
         Map<LocalDate, DiaUtil> saidas = new HashMap<>();
+        Duration horasTrabalhadas;
 
         pontos.forEach(ponto -> {
 
@@ -39,8 +41,13 @@ public class FolhaDeFrequenciaFactory {
             diaUtil.setSaida(diaSaida.getSaida());
         });
 
+        var horariosDias = entradas.values().stream().map(dia -> Duration.between(dia.getSaida(), dia.getEntrada()));
+        horasTrabalhadas = horariosDias.reduce(Duration.ZERO, (Duration::plus));
+
         folhaDeFrequencia.setDiasFrequentados(new ArrayList<>(entradas.values()));
         folhaDeFrequencia.setFuncionario(funcionario);
+        folhaDeFrequencia.setHorasTrabalhadas(horasTrabalhadas);
+        folhaDeFrequencia.setDiasUteis(22); //TODO lógica para obter dias uteis
 
         return folhaDeFrequencia;
     }

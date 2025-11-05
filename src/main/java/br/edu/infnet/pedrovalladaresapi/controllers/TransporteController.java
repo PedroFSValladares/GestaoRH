@@ -4,6 +4,7 @@ import br.edu.infnet.pedrovalladaresapi.domain.DTOs.transporte.AlterarTransporte
 import br.edu.infnet.pedrovalladaresapi.domain.models.Transporte;
 import br.edu.infnet.pedrovalladaresapi.requests.RequestResponse;
 import br.edu.infnet.pedrovalladaresapi.services.TransporteService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class TransporteController {
     }
 
     @PostMapping
-    public ResponseEntity<RequestResponse> incluir(@RequestBody Transporte transporte){
+    public ResponseEntity<RequestResponse> incluir(@Valid @RequestBody Transporte transporte){
         Transporte transporteCriado = transporteService.incluir(transporte);
         return RequestResponse.getByCode(HttpStatus.CREATED, transporteCriado);
     }
@@ -37,7 +38,7 @@ public class TransporteController {
     }
 
     @PutMapping("/{codigo}")
-    public ResponseEntity<RequestResponse> alterar(@PathVariable String codigo, @RequestBody AlterarTransporteDTO alterarTransporteDTO){
+    public ResponseEntity<RequestResponse> alterar(@PathVariable String codigo, @Valid @RequestBody AlterarTransporteDTO alterarTransporteDTO){
         Transporte transporteAlterado = new Transporte();
         transporteAlterado.setCodigo(codigo);
         transporteAlterado.setItinerario(alterarTransporteDTO.getItinerario());

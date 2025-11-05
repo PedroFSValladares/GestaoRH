@@ -17,7 +17,7 @@ public class Funcionario extends Pessoa{
     @ManyToOne
     @JoinColumn(name = "cargo_id")
     private Cargo Cargo;
-    @OneToMany()
+    @OneToMany(orphanRemoval = true)
     @JoinTable(
             name = "funcionario_viagens",
             joinColumns = @JoinColumn(name = "cpf"),

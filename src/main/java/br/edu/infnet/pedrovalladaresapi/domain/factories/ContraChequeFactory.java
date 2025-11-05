@@ -1,14 +1,28 @@
 package br.edu.infnet.pedrovalladaresapi.domain.factories;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.ContraCheque;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContraChequeFactory {
-    public static ContraCheque gerarContraCheque(Funcionario funcionario, List<Ponto> diasTrabalhados){
+    public static ContraCheque gerarContraCheque(Funcionario funcionario, FolhaDeFrequencia frequencia){
         ContraCheque contraCheque = new ContraCheque();
+        int diasTrabalhados = frequencia.getDiasFrequentados().size();
+        double valorRemuneracaoPorDia = funcionario.getCargo().getRemuneracao() / 22;
+        double remuneracaoAPagar = valorRemuneracaoPorDia * diasTrabalhados;
+
+        contraCheque.setFuncionario(funcionario);
+
+        List<Movimento> beneficio = new ArrayList<>();
+        Movimento remuneracaoBase = new Movimento();
+
+        remuneracaoBase.setNome("Remuneração");
+        remuneracaoBase.setValor(remuneracaoAPagar);
+
+        beneficio.add(remuneracaoBase);
+
+        contraCheque.setBeneficios(beneficio);
 
         return contraCheque;
     }

@@ -3,14 +3,15 @@ package br.edu.infnet.pedrovalladaresapi.services;
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
 import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IPontoRepository;
-import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
+import br.edu.infnet.pedrovalladaresapi.interfaces.IIdQueryableService;
+import br.edu.infnet.pedrovalladaresapi.interfaces.IIncludableService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Service
-public class FolhaDeFrequenciaService implements ICrudService<Ponto, Integer> {
+public class FolhaDeFrequenciaService implements IIncludableService<Ponto>, IIdQueryableService<Ponto, Integer> {
 
     private final IPontoRepository pontoRepository;
 
@@ -33,20 +34,6 @@ public class FolhaDeFrequenciaService implements ICrudService<Ponto, Integer> {
     }
 
     @Override
-    public List<Ponto> listarTodos() {
-        return pontoRepository.findAll();
-    }
-
-    @Override
-    public Ponto alterar(Integer i, Ponto entidade) {
-        return null;
-    }
-
-    @Override
-    public void deletar(Integer i) {
-
-    }
-
     public Ponto obterPorId(Integer id){
         return pontoRepository.findById(id).orElse(null);
     }

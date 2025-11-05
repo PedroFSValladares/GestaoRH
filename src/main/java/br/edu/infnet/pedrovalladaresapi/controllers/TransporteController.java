@@ -27,7 +27,7 @@ public class TransporteController {
 
     @GetMapping("/{codigo}")
     public ResponseEntity<RequestResponse> obterPorCodigo(@PathVariable String codigo){
-        Transporte transporte = transporteService.obterPorCodigo(codigo);
+        Transporte transporte = transporteService.obterPorId(codigo);
         return transporte == null ? RequestResponse.getByCode(HttpStatus.NOT_FOUND, null) : RequestResponse.getByCode(HttpStatus.OK, transporte);
     }
 
@@ -53,7 +53,7 @@ public class TransporteController {
 
     @PatchMapping("/inativar/{codigo}")
     public ResponseEntity<RequestResponse> inativar(@PathVariable String codigo){
-        Transporte transporte = transporteService.obterPorCodigo(codigo);
+        Transporte transporte = transporteService.obterPorId(codigo);
 
         if(transporte == null)
             return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);

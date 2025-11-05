@@ -2,13 +2,14 @@ package br.edu.infnet.pedrovalladaresapi.services;
 
 import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Cargo;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.ICargoRepository;
-import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
+import br.edu.infnet.pedrovalladaresapi.interfaces.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CargoService implements ICrudService<Cargo, Integer> {
+public class CargoService implements
+        IIncludableService<Cargo>, IUpdatabelService<Cargo, Integer>, IListableService<Cargo>, IIdQueryableService<Cargo, Integer>, IInativableService<Integer> {
 
     private final ICargoRepository cargoRepository;
 
@@ -37,14 +38,11 @@ public class CargoService implements ICrudService<Cargo, Integer> {
     }
 
     @Override
-    public void deletar(Integer id) {
-        cargoRepository.deleteById(id);
-    }
-
     public Cargo obterPorId(Integer id){
         return cargoRepository.findById(id).orElse(null);
     }
 
+    @Override
     public void inativar(Integer id){
         Cargo cargo = obterPorId(id);
 

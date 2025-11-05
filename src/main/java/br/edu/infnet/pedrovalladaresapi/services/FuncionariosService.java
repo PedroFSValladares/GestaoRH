@@ -5,13 +5,14 @@ import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Viagem;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IEnderecoRespository;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IFuncionarioRepository;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IViagemRepository;
-import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
+import br.edu.infnet.pedrovalladaresapi.interfaces.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class FuncionariosService implements ICrudService<Funcionario, String> {
+public class FuncionariosService implements
+        IIncludableService<Funcionario>, IUpdatabelService<Funcionario, String>, IListableService<Funcionario>, IIdQueryableService<Funcionario, String>, IInativableService<String> {
     private final IFuncionarioRepository funcionarioRepository;
     private final IEnderecoRespository enderecoRespository;
     private final IViagemRepository viagemRepository;
@@ -49,25 +50,22 @@ public class FuncionariosService implements ICrudService<Funcionario, String> {
     }
 
     @Override
-    public void deletar(String CPF) {
-        funcionarioRepository.deleteById(CPF);
-    }
-
     public void inativar(String CPF){
-        Funcionario funcionario = obterPorCPF(CPF);
+        Funcionario funcionario = obterPorId(CPF);
         if(funcionario != null){
             funcionario.setAtivo(false);
             funcionarioRepository.save(funcionario);
         }
     }
 
-    public Funcionario obterPorCPF(String CPF){
+    @Override
+    public Funcionario obterPorId(String CPF){
         var funcionario = funcionarioRepository.findById(CPF);
         return funcionario.orElse(null);
     }
 
     public Funcionario adicionarViagem(String cpf, List<Viagem> viagens){
-        var funcionario = obterPorCPF(cpf);
+        var funcionario = obterPorId(cpf);
         if(funcionario == null)
             return null;
         funcionario.setViagens(viagens);

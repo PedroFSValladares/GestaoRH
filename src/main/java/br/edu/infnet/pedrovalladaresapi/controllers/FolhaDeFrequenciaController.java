@@ -25,7 +25,7 @@ public class FolhaDeFrequenciaController {
 
     @PostMapping("/resgistrarPonto/{cpf}")
     public ResponseEntity<RequestResponse> baterPonto(@PathVariable String cpf){
-        Funcionario funcionario = funcionariosService.obterPorCPF(cpf);
+        Funcionario funcionario = funcionariosService.obterPorId(cpf);
         Ponto ponto = funcionario.criarPonto();
         ponto = folhaDeFrequenciaService.incluir(ponto);
 
@@ -35,7 +35,7 @@ public class FolhaDeFrequenciaController {
     @GetMapping("/{cpf}/{mes}")
     public ResponseEntity<RequestResponse> obterFolhaDeFuncionarioPorMes(@PathVariable String cpf, @PathVariable int mes){
         RequestResponse requestResponse;
-        Funcionario funcionario = funcionariosService.obterPorCPF(cpf);
+        Funcionario funcionario = funcionariosService.obterPorId(cpf);
         var pontos = folhaDeFrequenciaService.obterPorMesEFuncionario(mes, cpf);
 
         if(funcionario == null)

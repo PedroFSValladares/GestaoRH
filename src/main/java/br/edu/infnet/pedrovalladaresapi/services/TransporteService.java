@@ -2,13 +2,14 @@ package br.edu.infnet.pedrovalladaresapi.services;
 
 import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Transporte;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.ITransporteRepository;
-import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
+import br.edu.infnet.pedrovalladaresapi.interfaces.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TransporteService implements ICrudService<Transporte, String> {
+public class TransporteService implements
+        IIncludableService<Transporte>, IUpdatabelService<Transporte, String>, IListableService<Transporte>, IDeletableService<String>, IIdQueryableService<Transporte, String> {
     private final ITransporteRepository transporteRepository;
 
     public TransporteService(ITransporteRepository transporteRepository){
@@ -38,15 +39,9 @@ public class TransporteService implements ICrudService<Transporte, String> {
         transporteRepository.deleteById(s);
     }
 
-    public Transporte obterPorCodigo(String s){
+    @Override
+    public Transporte obterPorId(String s){
         return transporteRepository.findById(s).orElse(null);
     }
 
-    public void inativar(String s){
-        Transporte transporte = obterPorCodigo(s);
-        if(transporte != null){
-            transporte.setAtivo(false);
-            transporteRepository.save(transporte);
-        }
-    }
 }

@@ -28,7 +28,7 @@ public class FuncionarioController {
 
     @PostMapping
     public ResponseEntity<RequestResponse> incluir(@Valid @RequestBody IncluirFuncionarioDTO funcionario){
-        if(funcionariosService.obterPorCPF(funcionario.getCPF()) != null)
+        if(funcionariosService.obterPorId(funcionario.getCPF()) != null)
             return RequestResponse.getByCode(HttpStatus.CONFLICT, "Já existe um funcionário com este CPF.");
 
         Funcionario funcionarioAIncluir = FuncionarioFactory.criarFuncionario(funcionario);
@@ -39,8 +39,8 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{cpf}")
-    public ResponseEntity<RequestResponse> obterPorCPF(@PathVariable String cpf){
-        var funcionario = funcionariosService.obterPorCPF(cpf);
+    public ResponseEntity<RequestResponse> obterPorId(@PathVariable String cpf){
+        var funcionario = funcionariosService.obterPorId(cpf);
         return funcionario == null ? RequestResponse.getByCode(HttpStatus.NOT_FOUND, null) : RequestResponse.getByCode(HttpStatus.OK, funcionario);
     }
 
@@ -52,7 +52,7 @@ public class FuncionarioController {
 
     @PutMapping("/{cpf}")
     public ResponseEntity<RequestResponse> alterar(@PathVariable String cpf, @Valid @RequestBody AlterarFuncionarioDTO funcionarioParaAtualizar){
-        var funcionario = funcionariosService.obterPorCPF(cpf);
+        var funcionario = funcionariosService.obterPorId(cpf);
         if(funcionario == null)
             return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);
         else{
@@ -70,7 +70,7 @@ public class FuncionarioController {
 
     @PatchMapping("/inativar/{cpf}")
     public ResponseEntity<RequestResponse> inativar(@PathVariable String cpf){
-        var funcionario = funcionariosService.obterPorCPF(cpf);
+        var funcionario = funcionariosService.obterPorId(cpf);
         if(funcionario == null)
             return RequestResponse.getByCode(HttpStatus.NOT_FOUND, null);
         else {

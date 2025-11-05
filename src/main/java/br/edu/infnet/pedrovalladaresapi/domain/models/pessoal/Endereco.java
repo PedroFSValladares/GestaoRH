@@ -1,7 +1,6 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.pessoal;
 
 
-import br.edu.infnet.pedrovalladaresapi.exceptions.CepInvalidoException;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

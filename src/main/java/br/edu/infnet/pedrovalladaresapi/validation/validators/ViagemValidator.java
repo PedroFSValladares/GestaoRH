@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.validation.validators;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoViagem;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Viagem;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Viagem;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ViagemValida;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

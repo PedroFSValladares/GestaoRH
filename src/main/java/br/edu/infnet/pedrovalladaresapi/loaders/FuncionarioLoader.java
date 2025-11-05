@@ -1,18 +1,13 @@
 package br.edu.infnet.pedrovalladaresapi.loaders;
 
-import br.edu.infnet.pedrovalladaresapi.clients.ViaCepFeignClient;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.services.CargoService;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Cargo;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Endereco;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.Collection;
 
 @Order(2)

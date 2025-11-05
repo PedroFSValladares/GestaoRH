@@ -1,4 +1,6 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.financeiro;
+
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
 
 import java.util.List;
 

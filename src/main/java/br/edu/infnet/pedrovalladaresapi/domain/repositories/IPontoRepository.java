@@ -1,7 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.domain.repositories;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

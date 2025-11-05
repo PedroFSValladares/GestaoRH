@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Transporte;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Transporte;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.ITransporteRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.domain.repositories;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Cargo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,17 +1,13 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IPontoRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class FolhaDeFrequenciaService implements ICrudService<Ponto, Integer> {

@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.transporte;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoViagem;
 import jakarta.persistence.*;

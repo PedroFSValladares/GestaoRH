@@ -1,9 +1,9 @@
 package br.edu.infnet.pedrovalladaresapi.controllers;
 
 import br.edu.infnet.pedrovalladaresapi.domain.factories.FolhaDeFrequenciaFactory;
-import br.edu.infnet.pedrovalladaresapi.domain.models.FolhaDeFrequencia;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.FolhaDeFrequencia;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 import br.edu.infnet.pedrovalladaresapi.requests.RequestResponse;
 import br.edu.infnet.pedrovalladaresapi.services.FolhaDeFrequenciaService;
 import br.edu.infnet.pedrovalladaresapi.services.FuncionariosService;

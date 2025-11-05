@@ -1,6 +1,9 @@
 package br.edu.infnet.pedrovalladaresapi.domain.factories;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.*;
+import br.edu.infnet.pedrovalladaresapi.domain.models.financeiro.ContraCheque;
+import br.edu.infnet.pedrovalladaresapi.domain.models.financeiro.Movimento;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.FolhaDeFrequencia;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.controllers;
 
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.transporte.AlterarTransporteDTO;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Transporte;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Transporte;
 import br.edu.infnet.pedrovalladaresapi.requests.RequestResponse;
 import br.edu.infnet.pedrovalladaresapi.services.TransporteService;
 import jakarta.validation.Valid;

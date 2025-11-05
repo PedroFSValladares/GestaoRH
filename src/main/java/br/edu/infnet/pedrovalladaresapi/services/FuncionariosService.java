@@ -1,13 +1,9 @@
 package br.edu.infnet.pedrovalladaresapi.services;
 
-import br.edu.infnet.pedrovalladaresapi.domain.DTOs.viagem.IncluirViagemDTO;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Transporte;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Viagem;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Viagem;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IEnderecoRespository;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IFuncionarioRepository;
-import br.edu.infnet.pedrovalladaresapi.domain.repositories.ITransporteRepository;
 import br.edu.infnet.pedrovalladaresapi.domain.repositories.IViagemRepository;
 import br.edu.infnet.pedrovalladaresapi.interfaces.ICrudService;
 import org.springframework.stereotype.Service;

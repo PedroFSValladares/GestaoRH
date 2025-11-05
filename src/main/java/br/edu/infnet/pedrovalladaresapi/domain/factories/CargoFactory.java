@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.domain.factories;
 
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.cargo.IncluirCargoDTO;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Cargo;
 
 public class CargoFactory {
     public static Cargo criarCargo(IncluirCargoDTO incluirCargoDTO){

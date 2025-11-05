@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.pessoal;
 
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
 import jakarta.persistence.*;

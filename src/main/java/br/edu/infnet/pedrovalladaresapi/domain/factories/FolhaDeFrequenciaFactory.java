@@ -1,10 +1,10 @@
 package br.edu.infnet.pedrovalladaresapi.domain.factories;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
-import br.edu.infnet.pedrovalladaresapi.domain.models.DiaUtil;
-import br.edu.infnet.pedrovalladaresapi.domain.models.FolhaDeFrequencia;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.DiaUtil;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.FolhaDeFrequencia;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 
 import java.time.Duration;
 import java.time.LocalDate;

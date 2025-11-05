@@ -1,7 +1,7 @@
 package br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Viagem;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Endereco;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Viagem;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ViagemValida;
 import jakarta.validation.constraints.*;
 

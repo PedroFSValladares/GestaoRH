@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.validation.validators;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Pessoa;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Pessoa;
 import br.edu.infnet.pedrovalladaresapi.validation.annotations.ValidCpf;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

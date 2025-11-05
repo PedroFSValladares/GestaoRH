@@ -1,8 +1,8 @@
 package br.edu.infnet.pedrovalladaresapi.domain.factories;
 
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.IncluirFuncionarioDTO;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Cargo;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
 
 public class FuncionarioFactory {
     public static Funcionario criarFuncionario(IncluirFuncionarioDTO funcionarioDTO){

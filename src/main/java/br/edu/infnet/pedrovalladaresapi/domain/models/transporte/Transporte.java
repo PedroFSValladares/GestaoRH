@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.transporte;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.clients;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Endereco;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Endereco;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,6 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.loaders;
 
-import br.edu.infnet.pedrovalladaresapi.domain.models.Transporte;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Transporte;
 import br.edu.infnet.pedrovalladaresapi.services.TransporteService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.stereotype.Component;

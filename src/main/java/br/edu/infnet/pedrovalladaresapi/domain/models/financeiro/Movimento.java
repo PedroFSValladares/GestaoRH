@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.financeiro;
 
 public class Movimento {
     private String nome;

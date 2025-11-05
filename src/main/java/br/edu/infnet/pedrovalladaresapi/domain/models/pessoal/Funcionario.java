@@ -1,8 +1,9 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.pessoal;
 
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Viagem;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Random;
 
 @Entity
-public class Funcionario extends Pessoa{
+public class Funcionario extends Pessoa {
     @Column(name = "matricula", unique = true, length = 8)
     @NotEmpty(message = "O campo matrícula deve ser informado.")
     private String Matricula;

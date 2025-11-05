@@ -1,4 +1,6 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.frequencia;
+
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
 
 import java.time.Duration;
 import java.util.List;

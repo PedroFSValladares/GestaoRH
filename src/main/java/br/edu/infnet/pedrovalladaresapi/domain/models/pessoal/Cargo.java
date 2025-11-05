@@ -1,4 +1,4 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.pessoal;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;

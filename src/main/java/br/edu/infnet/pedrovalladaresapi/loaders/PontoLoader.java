@@ -1,11 +1,10 @@
 package br.edu.infnet.pedrovalladaresapi.loaders;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Funcionario;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Ponto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
+import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 import br.edu.infnet.pedrovalladaresapi.services.FolhaDeFrequenciaService;
 import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

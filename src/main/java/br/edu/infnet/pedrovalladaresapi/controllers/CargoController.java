@@ -3,7 +3,7 @@ package br.edu.infnet.pedrovalladaresapi.controllers;
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.cargo.AlterarCargoDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.DTOs.cargo.IncluirCargoDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.factories.CargoFactory;
-import br.edu.infnet.pedrovalladaresapi.domain.models.Cargo;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Cargo;
 import br.edu.infnet.pedrovalladaresapi.services.CargoService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;

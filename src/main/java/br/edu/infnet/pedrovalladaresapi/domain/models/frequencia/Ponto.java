@@ -1,6 +1,7 @@
-package br.edu.infnet.pedrovalladaresapi.domain.models;
+package br.edu.infnet.pedrovalladaresapi.domain.models.frequencia;
 
 import br.edu.infnet.pedrovalladaresapi.domain.enuns.TipoPonto;
+import br.edu.infnet.pedrovalladaresapi.domain.models.pessoal.Funcionario;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

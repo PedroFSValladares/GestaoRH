@@ -13,32 +13,21 @@ public class Cargo {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cargo_id")
     private int Id;
-    @Column(name = "nome_cargo")
-    @NotEmpty(message = "O Campo nome deve ser informado.")
+    @Column(name = "nome_cargo", nullable = false)
     private String Nome;
-    @Column(name = "remuneracao")
-    @NotNull(message = "O campo Remuneração deve ser informado.")
-    @Positive(message = "A remuneração deve ser maior que 0.")
+    @Column(name = "remuneracao", nullable = false)
     private Double Remuneracao;
-    @Column(name = "v_vale_alimentacao")
-    @NotNull(message = "O campo Vale alimentação deve ser informado.")
-    @PositiveOrZero(message = "O vale alimentação não pode ser negativo.")
+    @Column(name = "v_vale_alimentacao", nullable = false)
     private Double ValeAlimentacao;
-    @Column(name = "v_vale_transporte")
-    @NotNull(message = "O campo Vale transporte deve ser informado.")
-    @PositiveOrZero(message = "O vale transporte não pode ser negativo.")
+    @Column(name = "v_vale_transporte", nullable = false)
     private Double ValeTransporte;
-    @Column(name = "adicional_periculosidade")
-    @NotNull(message = "O campo adicional de periculosidade deve ser informado.")
+    @Column(name = "adicional_periculosidade", nullable = false)
     private Boolean AdicionalDePericulosidade;
-    @Column(name = "adcional_insalubridade")
-    @NotNull(message = "O campo adicional de insalubridade deve ser informado.")
+    @Column(name = "adcional_insalubridade", nullable = false)
     private Boolean AdicionalDeInsalubridade;
-    @Column(name = "carga_horaria")
-    @NotNull(message = "O campo carga horária deve ser informado.")
-    @Positive(message = "A carga horária deve ser maior que 0.")
+    @Column(name = "carga_horaria", nullable = false)
     private Integer CargaHoraria;
-    @Column(name = "ativo")
+    @Column(name = "ativo", nullable = false)
     private Boolean Ativo;
 
     @Override

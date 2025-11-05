@@ -13,18 +13,12 @@ public abstract class Pessoa {
 
     @Id
     @Column(name = "cpf", length = 11, unique = true)
-    @NotNull(message = "O campo CPF deve ser informado.")
-    @ValidCpf
     private String Cpf;
     @Column(name = "email")
-    @NotEmpty(message = "O campo e-mail deve ser informado.")
-    @Email(message = "O e-mail informado não é válido.")
     private String Email;
     @Column(name = "nome")
-    @NotEmpty(message = "O campo nome deve ser informado.")
     private String Nome;
     @Column(name = "telefone", length = 11)
-    @NotEmpty(message = "O campo telefone deve ser informado.")
     private String Telefone;
 
     @ManyToOne(cascade = CascadeType.REFRESH)

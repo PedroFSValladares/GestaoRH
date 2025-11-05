@@ -13,18 +13,13 @@ import jakarta.validation.constraints.Size;
 public class Endereco {
     @Id
     @Column(name = "cep", length = 8)
-    @Size(min = 8, max = 8, message = "O CEP informado não é válido.")
-    @NotEmpty(message = "O CEP deve ser informado.")
     private String CEP;
-    @NotEmpty(message = "O Logradouro deve ser informado")
     @Column(name = "logradouro")
     private String Logradouro;
     @Column(name = "complemento")
     private String Complemento;
-    @NotEmpty(message = "O bairro deve ser informado")
     @Column(name = "bairro")
     private String Bairro;
-    @NotEmpty(message = "A UF deve ser informada")
     @Column(name = "uf", length = 2)
     private String UF;
 

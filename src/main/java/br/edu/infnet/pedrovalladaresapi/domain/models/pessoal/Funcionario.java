@@ -13,7 +13,6 @@ import java.util.Random;
 @Entity
 public class Funcionario extends Pessoa {
     @Column(name = "matricula", unique = true, length = 8)
-    @NotEmpty(message = "O campo matrícula deve ser informado.")
     private String Matricula;
     @ManyToOne
     @JoinColumn(name = "cargo_id")

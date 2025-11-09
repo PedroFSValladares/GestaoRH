@@ -47,7 +47,8 @@ public class FuncionarioController {
     @GetMapping
     public ResponseEntity<RequestResponse> obterTodos(){
         var funcionarios = funcionariosService.listarTodos();
-        return funcionarios.isEmpty() ? RequestResponse.getByCode(HttpStatus.NO_CONTENT, null) : RequestResponse.getByCode(HttpStatus.OK, funcionarios);
+        var funcionarioResumidoDTOS = funcionarios.stream().map(Funcionario::toFuncionarioResumidoDTO).toList();
+        return funcionarios.isEmpty() ? RequestResponse.getByCode(HttpStatus.NO_CONTENT, null) : RequestResponse.getByCode(HttpStatus.OK, funcionarioResumidoDTOS);
     }
 
     @PutMapping("/{cpf}")

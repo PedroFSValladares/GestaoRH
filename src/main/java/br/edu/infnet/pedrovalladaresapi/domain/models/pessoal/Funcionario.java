@@ -1,9 +1,9 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models.pessoal;
 
+import br.edu.infnet.pedrovalladaresapi.domain.DTOs.funcionario.FuncionarioResumidoDTO;
 import br.edu.infnet.pedrovalladaresapi.domain.models.frequencia.Ponto;
 import br.edu.infnet.pedrovalladaresapi.domain.models.transporte.Viagem;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -64,6 +64,18 @@ public class Funcionario extends Pessoa {
         ponto.setData(LocalDate.now());
 
         return ponto;
+    }
+
+    public FuncionarioResumidoDTO toFuncionarioResumidoDTO(){
+        FuncionarioResumidoDTO funcionarioResumidoDTO = new FuncionarioResumidoDTO();
+
+        funcionarioResumidoDTO.setCpf(getCpf());
+        funcionarioResumidoDTO.setNome(getNome());
+        funcionarioResumidoDTO.setMatricula(getMatricula());
+        funcionarioResumidoDTO.setNomeCargo(getCargo().getNome());
+        funcionarioResumidoDTO.setStatus(getAtivo());
+
+        return funcionarioResumidoDTO;
     }
 
     public String gerarMatricula(){

@@ -32,7 +32,8 @@ public class CargoController {
     @GetMapping
     public ResponseEntity<RequestResponse> listarTodos(){
         var cargos = cargoService.listarTodos();
-        return cargos.isEmpty() ? RequestResponse.getByCode(HttpStatus.NO_CONTENT, null) : RequestResponse.getByCode(HttpStatus.OK, cargos);
+        var cargosResumidos = cargos.stream().map(Cargo::toCargoResumidoDTO).toList();
+        return cargos.isEmpty() ? RequestResponse.getByCode(HttpStatus.NO_CONTENT, null) : RequestResponse.getByCode(HttpStatus.OK, cargosResumidos);
     }
 
     @GetMapping("/{id}")

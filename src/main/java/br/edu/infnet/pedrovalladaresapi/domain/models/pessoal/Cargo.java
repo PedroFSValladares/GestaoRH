@@ -1,5 +1,6 @@
 package br.edu.infnet.pedrovalladaresapi.domain.models.pessoal;
 
+import br.edu.infnet.pedrovalladaresapi.domain.DTOs.cargo.CargoResumidoDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +36,15 @@ public class Cargo {
         return String.format("Cargo: %s | Id: %d | Carga Horária: %d | Remuneração: %.2f | Vale Alimentação: %.2f | Vale Transporte: %.2f | Periculosidade: %s | Insalubridade: %s",
                 Nome, Id, CargaHoraria, Remuneracao, ValeAlimentacao, ValeTransporte,
                 AdicionalDePericulosidade ? "Sim" : "Não", AdicionalDeInsalubridade ? "Sim" : "Não");
+    }
+
+    public CargoResumidoDTO toCargoResumidoDTO(){
+        CargoResumidoDTO cargoResumidoDTO = new CargoResumidoDTO();
+
+        cargoResumidoDTO.setId(this.Id);
+        cargoResumidoDTO.setNome(this.Nome);
+
+        return cargoResumidoDTO;
     }
 
     public int getId() {
